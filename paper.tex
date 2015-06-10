@@ -1,0 +1,101 @@
+\documentclass[conference]{IEEEtran}
+% conference papers do not typically use \thanks and this command
+% is locked out in conference mode. If really needed, such as for
+% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+% after \documentclass
+% \IEEEoverridecommandlockouts
+
+\usepackage{color,graphicx}
+\usepackage{cite}
+\usepackage[cmex10]{amsmath}
+%\usepackage{algorithm}
+%\usepackage[tight,footnotesize]{subfigure}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage{epsfig}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{textcomp}
+\usepackage{rotating}
+\usepackage{algpseudocode}
+\usepackage{amssymb}
+\usepackage[colorlinks=true,citecolor=blue,pagebackref=true]{hyperref}
+
+
+\definecolor{orange}{rgb}{1.0,0.3,0.0}
+\definecolor{violet}{rgb}{0.75,0,1}
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+\definecolor{cyan}{rgb}{0.2,0.7,0.7}
+\definecolor{blueish}{rgb}{0.2,0.2,0.8}
+
+\newcommand{\thunote}[1]{{\textcolor{cyan}{Thu: #1}}}
+\newcommand{\xynote}[1]{{\textcolor{orange}{XW: #1}}}
+\newcommand{\mdnote}[1]{{\textcolor{darkgreen}{Md: #1}}}
+\newcommand{\ricardonote}[1]{{\textcolor{red}{Ricardo: #1}}}
+
+\newcommand{\myparagraph}[1]{\noindent {\bf #1}}
+
+% redefine enumerate env for closer spacing
+% \renewenvironment{itemize}%
+%   {\begin{list}{$\bullet$}%
+%      {\topsep=0in\itemsep=0in\parsep=0in\partopsep=0in}%
+%    }{\end{list}}
+   
+\begin{document}
+
+\title{Grid-Aware Placement of Datacenters\\and Wind Farms
+% \thanks{This work was partially supported by NSF grant XXX-YYYYYY %CSR-1117368 
+% and the Rutgers Green Computing Initiative.}
+%\vspace{-0.3in}
+}
+
+% Thu: Anonymity for double-blind review.
+%
+% \author{
+% \IEEEauthorblockN{Xiaoying Wang} \IEEEauthorblockA{Department of
+%   Computer \\
+% Technology and Applications \\
+% Qinghai University, China\\
+% Email: wxy\_cta@qhu.edu.cn
+% }
+% \and
+% \IEEEauthorblockN{Md E. Haque, \'I\~nigo Goiri, \\ Ricardo
+% Bianchini, Thu D. Nguyen} \IEEEauthorblockA{Department of Computer Science\\
+% Rutgers University, USA\\
+% Email: \{mdhaque, goiri, ricardob, \\
+% tdnguyen\}@cs.rutgers.edu
+% }
+% \and
+% \IEEEauthorblockN{Divya Kurthakoti Chandrashekhara}
+% \IEEEauthorblockA{Siemens Corporate Research, USA\\
+% Email: div.s.sya@gmail.com
+% }
+% }
+
+
+% \IEEEpubid{978‐1‐4799‐0623‐9/13/\$31.00~\copyright~2013 IEEE}
+% \IEEEpubid{978‐1‐4799‐0623‐9/13/\$31.00~\copyright~2013 IEEE}
+%\IEEEpubid{\makebox[\columnwidth]{978‐1‐4799‐0623‐9/13/\$31.00~\copyright~2013 IEEE \hfill} \hspace{\columnsep}\makebox[\columnwidth]{ }} 
+
+% \CopyrightYear{2013}
+% \copyrightdata{978‐1‐4799‐0623‐9/13/\$31.00~\copyright~2013 IEEE}
+
+%\IEEEpubidadjcol
+
+\date{}
+
+\maketitle
+
+\input{abstract}
+\input{intro}
+\input{quantify}
+\input{framework}
+\input{placement}
+\input{related}
+\input{conclusion}
+%\input{acks}
+
+\bibliographystyle{IEEEtran}
+\bibliography{paper}
+
+\end{document}

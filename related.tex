@@ -1,0 +1,26 @@
+\section{Related Work}
+\label{sec:related}
+
+This section reviews relevant work to this paper in the recent literature, which are classfied into two categories.
+
+\subsection{Effect of data centers to the grid}
+
+In the smart grid era, data centers began to show the advantages for demand response and facilitate ancillary services due to its great and controllable flexibility. Researchers studied the effect of datacenter demand response on power consumption reduction \cite{lbnl12shortstudy, lbnl12report}. They found that 25\% of the demand savings can be done with minimal or no impact on datacenter performance. Also, 10\% of the load can be shed with short response time with no operational impact. They did not consider dynamic load migration of the workload which can result in further reduction in power demand. 	
+
+Mohsenian $\textit{et al.}$ in \cite{Mohsenian-Rad10grid} proposed a request distribution policy among datacenters to ensure power load balancing. They tried to minimize the maximum power on any transmission line by distributing the computing requests to suitable datacenter. Their work assumes that a fairly large number of datacenters (e.g. 6) are connected to the same power distribution network. In practice, it is very rare for some company to build several datacenters connected to the same power distribution network.  
+Aikema $\textit{et al.}$ in \cite{Aikema12} studied the energy cost savings that can be achieved when datcenter participates in ancillary services. Their simulation shows that 12\% cost savings can be done at the cost of 2\% performance loss (i.e. increased latency).
+
+Recently, Wierman $\textit{et al.}$ \cite{AdamWierman2014} surveyed the opportunies and challenges for data centers to ease the incorporation of renewable energy source into the grid and shaving the peak load. Further, Liu $\textit{et al.}$ in \cite{liu2014pricing} focused on the impact of datacenter demand response on grid. They concluded that datacenter demand response can reduce the storage requirement of a grid with renewable energy source. The other key finding of their work is voltage violation frequency is lower when datacenter is placed on the same power bus with the PV solar source.
+
+Different from these work, we quantify the data center impact on the grid by focusing on the losses brought because of penetrating additional load and generations to the grid network in a regional area. By incorporating such effects into a holistic framework, we convert such losses to grid operational costs and regard it as part of the total cost when building and planning the capacity of data centers and also the renewable energy power plants.
+
+\subsection{Datacenter placement and capacity planning}
+
+Some prior work has discussed about the placement issues of data centers. Alger \cite{Dalger05} explained how to choose an optimal location for the data center several years ago, by considering hazars, accessibility and scalability factors. Stansberr \cite{Stansberr06} ranked some cities by estimating the annual operation costs of the data center. Oley \cite{Boley09} considered looking for a proper location for the data center establishment only by investigating the power rates of different states. 
+Goiri $\textit{et al.}$ \cite{Goiri11place} focused on intelligently finding the best places for building multiple data centers to form a network for interactive Internet services. This work is to some extent close to ours, but they didn't consider the provisioning issues of renewable energy plants and the relevant costs.
+
+Larumbe $\textit{et al.}$ \cite{larumbe2012optimal} presented a mathematical problem aiming at solving the location and routing of cloud service components. Gao $\textit{et al.}$ \cite{gao2013answer} studied how to sit data centers near existing wind farms, and distributing load using a greedy online algorithm. 
+Berral $\textit{et al.}$ \cite{berral2014building} considered to select sites for data centers and on-site power plants aiming at follow-the renewable cloud services. Unlike our work, they didn't put insights the possible impact of data centers and distributed energy generations on the utility grid system. 
+
+Different from these work, we quantify and incorporate the impact of the site selection on the grid operation, and regard the summarized cost as the objective, which shows the importance of collaboring service providers and grid operators together to do the site and capacity planning.
+
