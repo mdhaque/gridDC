@@ -44,10 +44,10 @@ view:	all
 	gv paper.ps
 
 clean:
-	rm *.aux *.bbl *.blg *.log
+	rm *.aux *.bbl *.blg *.log *.brf *.out *.rel *.synctex.gz *~
 
 realclean:
-	rm *.aux *.bbl *.blg *.log paper.dvi paper.pdf paper.ps *~
+	rm *.aux *.bbl *.blg *.log *.brf *.out *.rel *.synctex.gz paper.pdf
 
 
 tr:	
