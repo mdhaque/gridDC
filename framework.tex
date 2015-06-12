@@ -33,9 +33,9 @@ Regarding operational costs, we assume that the human and labor costs for mainte
 On the other hand, during the transmission process the line capacity might be violated if the power flow exceeds the limit. We use $numLineVio(t)$ and $numVolVio(t)$ to denote the number of line capacity violations and voltage violations during power transmission. The grid operator will try to avoid such violations when operating the power grid system.
 
 \begin{table}[ht]
-\caption{Parameters for placement framework. Each location $l$ is a possible location from the set $\mathcal{L}$, and each $t$ denotes a time epoch during a time period $T$. Each $r$ is a type of renewable energy from the set $\mathcal{R}$.}
+\caption{Framework parameters.  $l$ is a location, and $t$ is a time period.}
 \begin{center}
-\begin{tabular}{|l|p{1.7in}|r|}
+\begin{tabular}{|l|p{1.9in}|r|}
 \hline
 \textbf{Symbol} & \textbf{Meaning} & \textbf{Unit}\\
 \hline
@@ -46,28 +46,28 @@ $pLand(l)$ & land price at $l$ & \$/m$^2$ \\
 \hline \hline
 $PUE(l,t)$ & PUE at $l$ during $t$ & \\
 $maxPUE(l)$ & maximum PUE at $l$ & \\
-$dcArea$ & land area needed per kW of DC capacity &  m$^2$/kW \\
+$dcArea$ & land needed per kW of DC compute capacity &  m$^2$/kW \\
 $cLinePow(l)$ & cost to layout power line from $l$ to the closest power plant & \$ \\
 $cLineNet(l)$ & cost to layout optical fiber from $l$ to closest network backbone & \$ \\
-$pBuildDC(c)$ & price of building a datacenter with $c$ power capacity & \$/kW \\
-$serverPow$ & server peak power demand & W \\
-$switchPow$ & switch peak power demand & W \\
-$servsPerSwitch$ & number of servers per switch & servs/switch \\
-$pServer$ & price of a server &  \$/server \\
+$pBuildDC(c)$ & per kW price of building a datacenter with $c$ power capacity & \$/kW \\
+$serverPow$ & server peak power demand & W/serv \\
+$switchPow$ & switch peak power demand & W/switch \\
+$servsSwitch$ & number of servers per switch & servs/switch \\
+$pServer$ & price of a server &  \$/serv \\
 $pSwitch$ & price of a network switch & \$/switch \\
-$pNetBWServ$ & cost of external network bandwidth per server & \$/serv-month\\
+$pNBWServ$ & cost of external network bandwidth per server & \$/serv-month\\
 $pEnergy(l)$ & grid electricity price at $l$ & \$/kWh \\
-$powDemand(t)$ & avg computing power demand of DC during $t$ &  kW \\
+$powNeed(t)$ & avg computing power demand of DC during $t$ &  kW \\
 \hline \hline
 $\beta(l,t)$ & avg generation efficiency of wind energy at $l$ during $t$ &  \%  \\
-$wfArea$ & land area needed per kW wind energy & \$/m$^2$ \\
-$pBuildWF$ & price of building a wind power plant & \$/kW \\
+$wfArea$ & land needed per kW wind power & \$/m$^2$ \\
+$pBuildWF$ & per kW price of building a wind power plant & \$/kW \\
 %$avgEff(l)$ & avg generation efficiency of wind energy at $l$ & \% \\
 $revEnergy(l)$ & revenue for selling wind energy to grid at $l$ & \$/kWh \\
 \hline \hline
-$transLoss(t)$  & avg transmission loss in grid during $t$ & kW \\
+$transLoss(t)$  & avg system transmission loss in grid during $t$ & kW \\
 %$disLoss(t)$ & the losses for distributing power to data center during time epoch $t$ & kW \\
-$pGridLoss$ & the price for transimission losses per kWh & \$/kWh \\
+$pGridLoss$ & the price for system transmission losses per kWh & \$/kWh \\
 %$numLineVio(t)$  & the number of line capacity violation during time epoch $t$   &  \#  \\
 %$numVolVio(t)$  & the number of voltage level violation during time epoch $t$  &  \#  \\
 \hline
@@ -100,10 +100,10 @@ Equation 1 in Fig.\ref{fig:optimization} shows the optimization objective of our
         dcTotalPow & = & dcCapacity \cdot maxPUE(d) \\
         dcITCost & = & nServers \cdot pServer + nSwitches \cdot
             pSwitch \\
-        nServers & = & dcCapacity / (serverPow + switchPow / serversPerSwitch)\\
-        nSwitches & = & nServers / servsPerSwitch\\
-        dcNetCost & = & nServers \cdot pNetBWServ \\
-        dcEnergyCost & = & \sum_{t \in T} {|t| \cdot powDemand(t) \cdot pEnergy(d) } \\
+        nServers & = & dcCapacity / (serverPow + switchPow / servsSwitch)\\
+        nSwitches & = & nServers / servsSwitch\\
+        dcNetCost & = & nServers \cdot pNBWServ \\
+        dcEnergyCost & = & \sum_{t \in T} {|t| \cdot powNeed(t) \cdot pEnergy(d) } \\
  	wfCost & = & wfCAPEX - wfRev  \\
         wfCAPEX & = & wfLandCost + wfBuildCost \\
         wfLandCost & = & pLand(w) \cdot wfArea \cdot wfCapacity \\
@@ -112,7 +112,7 @@ Equation 1 in Fig.\ref{fig:optimization} shows the optimization objective of our
             \beta(w,t) \cdot wfCapicity } \\
         gridCost & = & pGridLoss \cdot \sum_{t \in T}{ |t| \cdot transLoss(t)} \\% + disLoss(t))}\\
 \end{eqnarray}
-\caption{Optimization framework.}
+\caption{Optimization framework.  The datacenter is placed at location $d$ and the windfarm is placed at location $w$.  The objective is to minimize $totalCost$ for a given time period $T$ (divided into epochs denoted by $t$) and a set of possible locations for $d$ and $w$.  $|t|$ denotes the length of epoch $t$.}
 \label{fig:optimization}
 \end{figure*}
 
