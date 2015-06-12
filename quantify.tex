@@ -80,7 +80,7 @@ DC6 & Massachusetts & 27& 300.21 & 4 \\
 }
 
 \item{Wind farm model: \\
-The wind farms connected to bus 18, 28, 36, 37 and 38 (Figure~\ref{fig:newengland}) are lumped models of several wind farms within a geographical region. The locations and capacity settings of the five wind farms are presented in Table~\ref{tab:wf_setting}. We assume that each farm can be represented by $'n$' identical wind turbines, where $n$= total farm rated capacity/individual wind turbine rating. This approximation does not change any of our results because we are interested in studying the global impact of wind farm powered data centers on the electric grid. Also, since most of the wind turbines in this region are the GE 1.5MW machines, we consider the GE machine wind speed versus power characteristics \cite{lei2006modeling}. The wind speed versus turbine output characteristics is commonly referred to as the power curve (Fig.\ref{fig:windcurve}). From Fig.\ref{fig:windcurve} we can see that the cut-in wind speed, i.,e the wind speed at which the turbine starts producing power, is 5m/s and the cut-off wind speed is 25m/s, beyond this the turbine will be shut down for safety reasons. The wind turbine produces rated output (1.5MW) between wind speeds of 13-25m/s.
+The wind farms connected to bus 18, 28, 36, 37 and 38 (Figure~\ref{fig:newengland}) are lumped models of several wind farms within a geographical region. The locations and capacity settings of the five wind farms are presented in Table~\ref{tab:wf_setting}. We assume that each farm can be represented by $'n$' identical wind turbines, where $n$= total farm rated capacity/individual wind turbine rating. This approximation does not change any of our results because we are interested in studying the global impact of wind farm powered data centers on the electric grid. Also, since most of the wind turbines in this region are the GE 1.5MW machines, we consider the GE machine wind speed versus power characteristics \cite{lei2006modeling}. The wind speed versus turbine output characteristics is commonly referred to as the power curve (Figure~\ref{fig:windcurve}). From Figure~\ref{fig:windcurve} we can see that the cut-in wind speed, i.,e the wind speed at which the turbine starts producing power, is 5m/s and the cut-off wind speed is 25m/s, beyond this the turbine will be shut down for safety reasons. The wind turbine produces rated output (1.5MW) between wind speeds of 13-25m/s.
 %%%
 \begin{figure}[ht]
 \centering
@@ -130,34 +130,44 @@ Q_{i} = -\Sigma_{j=1}^{n}(|Y_{ij}||V_{i}||V_{j}|sin(\theta_{ij}+\delta_{j}-\delt
 where $P_{i}$ and $Q_{i}$ are real and reactive powers at the $i^{th}$ bus; $|V_{i}| \angle \delta_{i}$ is the voltage magnitude and angle at the the $i^{th}$ bus; $|Y_{ij}| \angle \theta_{ij}$ is the admittance of the branch between $i^{th}$ and $j^{th}$ bus.
 For a given power $P_{i}$ and $Q_{i}$ at the $i^{th}$ load bus, the above powerflow equations are used to solve for the voltage magnitude and angle at the $i^{th}$ bus. Since the above equations, i.e., real and reactive powers are non-linear function of voltage they are solved iteratively using Newton Raphson method. Once the bus voltages are calculated the line flows and system losses are computed.
 \subsection{Results and discussion}
-I need only the following results for each case (Case1, Case2 and Case 3):
-1. a table containing system losses for each case (total loss its only one number for each case)
-2. any line capacity violations (line number)
-3. voltage violations if any (bus number)
+%I need only the following results for each case (Case1, Case2 and Case 3):
+%1. a table containing system losses for each case (total loss its only one number for each case)
+%2. any line capacity violations (line number)
+%3. voltage violations if any (bus number)
+%%%
 
-The simulation results for the three cases are as shown in Table \ref{tab:results3cases}.
-\xynote{
-Configuration for the three cases:
-(1)wind speeds for the existing aggregated wind farms are set to MEDIUM(9m/s).
-(2) the size of the additional data center is set to 100MW.
-(3) For Case 2, the additional data center is located onto bus 18. For Case 3, the data center is located onto bus 10.
-}
+Here, we show the simulation results of the three cases and give some discussion about them. First, the total system losses are compared over the three cases under the condition of three wind speed settings, as shown in Figure~\ref{fig:loss-cases}. The background load of the electricity grid is set to normal (6254MW in total,summarized over all the buses), as described previously. Three categories of wind speed settings are: LOW (4-6m/s), MEDIUM (7-11m/s), and HIGH ($>$11m/s). The size of the additional data center in Case 2\&3 is set to 200MW. Specifically, for Case 2 the data center is located at bus 18 (co-located with wind farm 1) and for Case 3 the data center is located at bus 10 (away from all wind farms).
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\columnwidth]{img/loss3cases.pdf}
+\caption{Results of system losses}
+\label{fig:loss-cases}
+\end{figure}
+
+By comparing the values of system losses from Fig. \ref{fig:loss-cases}, it can be observed that the co-location case (Case 2) could lead to more losses than Case 1 and Case 3. Take MEDIUM setting for example, the system losses of Case 3 is about 6\% less than Case 2, which illustrates system loss can be reduced by placing the data center correctly and co-location is not necessarily the best choice.
+
+Next,in order to investigate the impact of data center placement on line capacity violations and voltage violations, we change the scenario to peak system load (6885MW in total) and conduct the experiments again. Evaluation results are illustrated in Table \ref{tab:results-linevio}, which shows that there is one overloaded branch from bus 4 to bus 5 in Case 2. This highlights that different placement choice of the additional data center can make some particular lines overloaded. During our experiments, although there are only a few cases where lines are overloaded, annually the number of times and how long these over-loads could occur depends on the frequency and duration of occurrence of a particular wind speed and load condition. If it is too frequent or more persistent then the over-loads could be a serious problem and might require building new transmission lines. \xynote{need to add costs of building new line? I haven't found the reference yet.}
+
 
 \begin{table}[ht]
 \begin{center}
-\caption{Results of the three cases}
-\begin{tabular}{|c|c|c|c|}
+\caption{Results of overloaded lines}
+\begin{tabular}{|c|c|c|}
 \hline
-Case No. & System losses (MW) & Line capacity violations & Voltage Violations \\
+Case No. & \# of overloaded lines & List of Overloaded Lines \\
 \hline
-1 & 50.212 & None & None\\
-2 & 50.414 & None & None \\
-3 & 49.772 & None & None  \\
+1 & 0 & None\\
+2 & 1 &  bus 4 - bus 5 \\
+3 & 0 & None \\
 
 \hline
 
 \end{tabular}
    \vspace{.05in}
-\label{tab:results3cases}
+\label{tab:results-linevio}
 \end{center}
-\end{table} 
+\end{table}
+
+Even though we have provided one set of results for a particular set of condition, we have simulated different wind speed and load conditions. We found that in general the system loss magnitude could change. However, in most cases we saw that co-location is not the optimal choice for minimum system loss. In Section \ref{sec:framework} we will describe a method for determining the data center location that will correspond to minimal system loss annually and will cover all the wind speed and system load conditions.
+
