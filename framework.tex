@@ -1,6 +1,7 @@
 \section{Framework for smart placement}
 \label{sec:framework}
 
+\thunote{I have not yet worked on these introductory paragraphs.  Will change next to reflect Divya's comments.}
 The previous section highlights that placing data centers and wind
 farms has obvious impact on the grid trasmission network system. Thus,
 when a service provider is looking for best locations to estabish a
@@ -14,28 +15,10 @@ designed to be connected to the same grid network.
 
 By grid-aware placement, we attempt to efficiently select a set of locations for one or more data centers to support a given amount of computational power, as well as one or more green power plants (e.g. solar, wind or others) to provide a given power capacity. The main goal is to minimize the overall cost for data centers, green power plants and also the grid network operation. The next subsections defines some important parameters in the selection procedure. Then, the cost model and the entire optimization problem will be formulated and described.
 
-\subsection{Parameters for the placement framework}
-
-Table \ref{tab:par_setting} gives all of the parameters defined in our framework.  These parameters relate to costs, revenue and losses over different geographical locations. We generally classify them into three categories: data-center-related, renewable-related and grid-related.
-
-\subsubsection{Data-center-related costs} Given a target capacity of how large a data center is planned to build, we can calculate the capital cost first. The capital cost of a data center at location $l$, denoted as $DC\_CAPcost(l)$, can be broken down into land cost ($DC\_landCost(l)$), building cost ($DC\_buildingCost(l)$) and hardware cost($DC\_hwCost(l)$). Land cost can be computed by land price at that location and the accommodated data center capacity. Building cost depends on the maximum capacity of the data center, too. Hardware cost contains both server cost and switch cost, which can be computed given the total capacity of the data center. Besides, hardware cost also includes costs for building lines connecting the data center to the Internet backbone and the transmission grid, denoted as $costLineNet(l)$ and $costLineGrid(l)$ here respectively. We assume them independent of the data center size, but dependent on the location $l$ of the data center.
-
-Besides capital costs, operating and managing a data center also incurs operational cost, including costs for using the network bandwidth and the electricity from the power grid. We denote them as $DC\_netCost(l)$ and $DC\_energyCost(l)$ respectively, which both depend on the location $l$ of the data center. Furthermore, the energy cost for the data center is also related to the varying demands of the data center workload over different time period, denoted as $demand(l,t)$ hereafter.
-
-\subsubsection{Renewable-related costs} The costs for building and running a renewable power plant also include capital costs and operation costs. The capital cost of a type $r$ plant at location $l$, denoted as $RE\_CAPcost(l,r)$, can be broken down into land cost ($RE\_landCost(l,r)$), building cost ($RE\_buildCost(l,r)$) and line cost ($costLineNet(l)$) for connecting to the transmission grid. Specially, if we are also building a data center in the same location, the connection line to the grid could be shared by the plant, and in this case the line cost could be saved. Similarly, the land cost for renewable power plant depends on the needed area and the land price at that location. The building cost mainly depends on the desired capacity of the plant.
-
-Regarding operational costs, we assume that the human and labor costs for maintenance and operation are same over different locations. Thus, by operating the renewable power plant, we only consider the possible revenue it could bring by generating electricity power and transmitting power to the grid. Here, we regard the revenue as a negative cost for the power plant, denoted as $RE\_OPrev(l,r)$, which is closely related to the power generation efficiency at the location and the energy selling price there.
-
-\subsubsection{Grid-related costs} When connecting the data centers and the renewable energy plants to the utility grid, we are adding both generation and consumption components into the network. This will change the power flow of the whole network, and thus the total losses of the transmission network will be different. Thus, the transmission loss ($transLoss(t)$) will be affected by the generating and consuming power amount of data centers and renewable plants, and also the buses they are connected to, as we showed in Section \ref{sec:quantify}.
-
-%Besides, distributing power to the end-users on the grid will also incur losses. Here we only consider the additional distribution losses for delivering power to the data centers, denoted as $distLoss(t)$. Then the grid costs include both transmission losses and distribution losses in our framework.
-
-On the other hand, during the transmission process the line capacity might be violated if the power flow exceeds the limit. We use $numLineVio(t)$ and $numVolVio(t)$ to denote the number of line capacity violations and voltage violations during power transmission. The grid operator will try to avoid such violations when operating the power grid system.
-
 \begin{table}[ht]
-\caption{Parameters for placement framework. Each location $l$ is a possible location from the set $\mathcal{L}$, and each $t$ denotes a time epoch during a time period $T$. Each $r$ is a type of renewable energy from the set $\mathcal{R}$.}
+\caption{Framework parameters.  $l$ is a location, and $t$ is a time period.}
 \begin{center}
-\begin{tabular}{|l|p{1.7in}|r|}
+\begin{tabular}{|l|p{1.9in}|r|}
 \hline
 \textbf{Symbol} & \textbf{Meaning} & \textbf{Unit}\\
 \hline
@@ -46,28 +29,28 @@ $pLand(l)$ & land price at $l$ & \$/m$^2$ \\
 \hline \hline
 $PUE(l,t)$ & PUE at $l$ during $t$ & \\
 $maxPUE(l)$ & maximum PUE at $l$ & \\
-$dcArea$ & land area needed per kW of DC capacity &  m$^2$/kW \\
+$dcArea$ & land needed per kW of DC compute capacity &  m$^2$/kW \\
 $cLinePow(l)$ & cost to layout power line from $l$ to the closest power plant & \$ \\
 $cLineNet(l)$ & cost to layout optical fiber from $l$ to closest network backbone & \$ \\
-$pBuildDC(c)$ & price of building a datacenter with $c$ power capacity & \$/kW \\
-$serverPow$ & server peak power demand & W \\
-$switchPow$ & switch peak power demand & W \\
-$servsPerSwitch$ & number of servers per switch & servs/switch \\
-$pServer$ & price of a server &  \$/server \\
+$pBuildDC(c)$ & per kW price of building a datacenter with $c$ power capacity & \$/kW \\
+$serverPow$ & server peak power demand & W/serv \\
+$switchPow$ & switch peak power demand & W/switch \\
+$servsSwitch$ & number of servers per switch & servs/switch \\
+$pServer$ & price of a server &  \$/serv \\
 $pSwitch$ & price of a network switch & \$/switch \\
-$pNetBWServ$ & cost of external network bandwidth per server & \$/serv-month\\
+$pNBWServ$ & cost of external network bandwidth per server & \$/serv-month\\
 $pEnergy(l)$ & grid electricity price at $l$ & \$/kWh \\
-$powDemand(t)$ & avg computing power demand of DC during $t$ &  kW \\
+$powNeed(t)$ & avg computing power demand of DC during $t$ &  kW \\
 \hline \hline
 $\beta(l,t)$ & avg generation efficiency of wind energy at $l$ during $t$ &  \%  \\
-$wfArea$ & land area needed per kW wind energy & \$/m$^2$ \\
-$pBuildWF$ & price of building a wind power plant & \$/kW \\
+$wfArea$ & land needed per kW wind power & \$/m$^2$ \\
+$pBuildWF$ & per kW price of building a wind power plant & \$/kW \\
 %$avgEff(l)$ & avg generation efficiency of wind energy at $l$ & \% \\
 $revEnergy(l)$ & revenue for selling wind energy to grid at $l$ & \$/kWh \\
 \hline \hline
-$transLoss(t)$  & avg transmission loss in grid during $t$ & kW \\
+$transLoss(t)$  & avg system transmission loss in grid during $t$ & kW \\
 %$disLoss(t)$ & the losses for distributing power to data center during time epoch $t$ & kW \\
-$pGridLoss$ & the price for transimission losses per kWh & \$/kWh \\
+$pTransLoss$ & the price for system transmission losses per kWh & \$/kWh \\
 %$numLineVio(t)$  & the number of line capacity violation during time epoch $t$   &  \#  \\
 %$numVolVio(t)$  & the number of voltage level violation during time epoch $t$  &  \#  \\
 \hline
@@ -76,21 +59,16 @@ $pGridLoss$ & the price for transimission losses per kWh & \$/kWh \\
 \end{center}
 \end{table}
 
+\subsection{Optimization Framework}
 
-\subsection{Optimization problem formulation}
-Using the parameters shown in Table \ref{tab:par_setting}, we can formulate the optimization problem as shown in Figure~\ref{fig:optimization}. The problem is set up from the perspective of both IT company and the grid operator, who want to collaborate for building up green datacenters, with the purpose of minimizing the summarized cost including data center cost, green power plant cost and the grid cost.
+\thunote{Need to integrate this thought below.}
+The problem is set up from the perspective of both IT company and the grid operator, who want to collaborate for building up green datacenters, with the purpose of minimizing the summarized cost including data center cost, green power plant cost and the grid cost.
 
-Denote $\mathcal{L}$ as the set of all candidate locations, $\mathcal{T}$ as the set of all time epochs, $\mathcal{R}$ as the set of all types of renewable energy. The input of the optimization problem is listed as follows:
-(1) the total computational capacity of all the data centers to set up, denoted as $CapacityDC$;
-(2) the parameters of each location in $\mathcal{L}$ during each time epoch in $\mathcal{T}$ such as prices, PUE (Power Utilization Efficiency), demand, power generation efficiency and so on;
-(3) the minimum availability constraint for the data center network. (\xynote{to limit the number of data centers})
-The outputs of the problem is the lowest cost found and the corresponding locations for data centers and renewable power plant, as well as the capacity provisioned at each location for data centers or green power plants (if any).
-
-Equation 1 in Fig.\ref{fig:optimization} shows the optimization objective of our defined problem, i.e. $TotalCost$, where $DC(l)$ and $RE(l,r)$ are booleans indicating whether to place a data center or power plant of type $r$ at location $l$. $DC\_Cost(l)$ , $RE\_Cost(l,r)$ and $Grid\_Cost$ represent the cost for data centers, renewable plants and the power grid system respectively.
+Table \ref{tab:par_setting} lists the set of parameters in our framework.  Using these parameters, we define the optimization problem shown in Figure~\ref{fig:optimization}.  The objective of this optimization problem is to minimize the total cost ($totalCost$) of building and operating a datacenter of a given size ($dcCapacity$) and a wind farm of a given size ($wfCapacity$).  The datacenter and wind farm can each be place at any location within a set of given locations.  The total cost has three components, the cost of the datacenter ($dcCost$), the cost of the wind farm ($wfCost$), and the cost of losses in the transmission system ($transCost$).
 
 \begin{figure*}
 \begin{eqnarray}
-	totalCost & = & dcCost + wfCost + energyCost \\
+	totalCost & = & dcCost + wfCost + transCost \\
 	dcCost & = & dcCAPEX + dcOPEX \\
         dcCAPEX & = & dcLandCost + dcBuildCost + dcITCost \\
         dcOPEX & = & dcNetCost + dcEnergyCost \\
@@ -100,21 +78,46 @@ Equation 1 in Fig.\ref{fig:optimization} shows the optimization objective of our
         dcTotalPow & = & dcCapacity \cdot maxPUE(d) \\
         dcITCost & = & nServers \cdot pServer + nSwitches \cdot
             pSwitch \\
-        nServers & = & dcCapacity / (serverPow + switchPow / serversPerSwitch)\\
-        nSwitches & = & nServers / servsPerSwitch\\
-        dcNetCost & = & nServers \cdot pNetBWServ \\
-        dcEnergyCost & = & \sum_{t \in T} {|t| \cdot powDemand(t) \cdot pEnergy(d) } \\
+        nServers & = & dcCapacity / (serverPow + switchPow / servsSwitch)\\
+        nSwitches & = & nServers / servsSwitch\\
+        dcNetCost & = & nServers \cdot pNBWServ \\
+        dcEnergyCost & = & \sum_{t \in T} {|t| \cdot powNeed(t) \cdot PUE(t) \cdot pEnergy(d) } \\
  	wfCost & = & wfCAPEX - wfRev  \\
         wfCAPEX & = & wfLandCost + wfBuildCost \\
         wfLandCost & = & pLand(w) \cdot wfArea \cdot wfCapacity \\
         wfBuildCost & = & pBuildWF \cdot wfCapicity + cLinePow(w) \\
         wfRev & = & revEnergy(w) \cdot  \sum_{t \in T}{ |t| \cdot
             \beta(w,t) \cdot wfCapicity } \\
-        gridCost & = & pGridLoss \cdot \sum_{t \in T}{ |t| \cdot transLoss(t)} \\% + disLoss(t))}\\
+        transCost & = & pTransLoss \cdot \sum_{t \in T}{ |t| \cdot transLoss(t)} \\% + disLoss(t))}\\
 \end{eqnarray}
-\caption{Optimization framework.}
+\caption{Optimization framework.  The datacenter is placed at location $d$ and the windfarm is placed at location $w$.  The objective is to minimize $totalCost$ for a given time period $T$ (divided into epochs denoted by $t$) and a set of possible locations for $d$ and $w$.  $|t|$ denotes the length of epoch $t$.}
 \label{fig:optimization}
 \end{figure*}
+
+
+\subsubsection{Datacenter} The cost of the datacenter can be broken down into capital ($dcCAPEX$) and operational ($dcOPEX$) components.  The capital costs are those investments made upfront and depreciated over the lifetime of the datacenter.  These costs include the cost for buying land ($dcLandCost$), building the datacenter ($dcBuildCost$), and buying IT equipment ($dcITCost$).  The cost of building the datacenter include datacenter construction cost as well as the costs of laying power and network lines to the datacenter.  IT equipment includes servers and switches.  Land price varies according to location ($pLand(d)$ for location $d$), whereas the other prices do not to a first approximation.  Of course, the total cost of laying the power ($cLinePow(d)$) and network ($cLineNet(d)$) lines depend on location, as the distances to the closest power plant and network backbone are location-dependent.  The datacenter construction cost is typically estimated as a function of the maximum power to be consumed by the datacenter.  This maximum power is that required by the maximum number of servers and network switches when running at 100\% utilization times the maximum expected PUE of the datacenter.  The PUE is computed by dividing the overall power consumption by the power consumption of the computational equipment.  The PUE is higher when temperature and/or humidity are high, since cooling consumes more energy under those conditions.
+
+The operational costs are those incurred during the operation of the datacenter, and include costs for external network bandwidth use ($dcNetCost$) and the grid electricity ($dcEnergyCost$) required to run the datacenter.  (There is also a cost for water, which is currently not considered by can be easily added.)  The electricity cost is computed based on the IT equipment's power demand over time ($powerNeed(t)$), the PUE, and the electricity price.  Both the electricity price and the PUE vary with location.
+
+Finally, lower taxes and one-time incentives are another important component of the cost of a datacenter.  For example, some states in the US lower taxes on datacenters, as they generate employment and wealth around them.  This component depends on the nature of the savings and applies to each cost in a different way.  Although we do not consider this component further, it is easy to add it to our framework.
+
+\subsubsection{Wind farm}  The cost of the wind farm is modeled as the capital cost ($wfCAPEX$) minus the revenue earned by selling the wind energy to the grid ($wfRef$).  We assume that the operational cost of operating the wind farm is low, and so do not consider it here; of course, this cost can be easily added to the framework.  The capital costs include the cost for buying land ($wfLandCost$) and building the wind farm ($wfBuildCost$), which in turn includes the construction cost and the cost of laying the power line from the wind farm to the closest power plant.  The construction cost is assume to be a linear function of the desired power generation capacity.  Note that if the datacenter and wind farm are co-located, then the cost for laying power lines is incurred only once.
+
+The revenue earned by the wind farm is computed over the time period $T$, where the energy generated within any time epoch $t$ in $T$ at location $w$ depends on the efficiency of the wind turbines and the wind speed.  The efficiency of today's wind turbine is close to 50\%.  We capture the efficiency and impact of wind speed in epoch $t$ using the parameter $\beta(w,t)$, which gives the fraction of the wind farm's maximum capacity actually produced during $t$.
+
+\subsubsection{Transmission system} As discussed above, adding a datacenter and wind farm to an existing transmission system will alter the power flow of the network, thus affecting the system transmission loss.  We model this loss across the entire time period $T$, and assume that each unit of loss has a corresponding cost.
+
+% On the other hand, during the transmission process the line capacity might be violated if the power flow exceeds the limit. We use $numLineVio(t)$ and $numVolVio(t)$ to denote the number of line capacity violations and voltage violations during power transmission. The grid operator will try to avoid such violations when operating the power grid system.
+
+
+\subsubsection{Constraints}
+
+\thunote{Still need to finish the section.}
+
+The outputs of the problem is the lowest cost found and the corresponding locations for data centers and renewable power plant, as well as the capacity provisioned at each location for data centers or green power plants (if any).
+
+Equation 1 in Fig.\ref{fig:optimization} shows the optimization objective of our defined problem, i.e. $TotalCost$, where $DC(l)$ and $RE(l,r)$ are booleans indicating whether to place a data center or power plant of type $r$ at location $l$. $DC\_Cost(l)$ , $RE\_Cost(l,r)$ and $Grid\_Cost$ represent the cost for data centers, renewable plants and the power grid system respectively.
+
 
 The overall cost should be optimized under the constraints, which are listed in Figure~\ref{fig:constraints}. Equation 21-23 show the constraints of the provisioned capacity for data centers. Equation 24 means that the provisioned capacity for renewable energy plants are determined by the total power demand from the data centers. This constraint is added indicating that the power generation and consumption added to the grid should be balanced from the perspective of the grid system. Furthermore, Equation 26
 is a strict limitation for keeping the grid out of any violations at any given time $t$, since we assume the grid reliability is crucial and must be guaranteed.
