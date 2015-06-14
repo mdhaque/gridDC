@@ -1,0 +1,28 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Metric choice: Data center placements in renewable power grid}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Impact of data center on renewable power grid}{section.2}% 3
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Overloading of transmission lines}{subsection.2.1}% 4
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Voltage variation in electric grid}{subsection.2.1}% 5
+\BOOKMARK [3][-]{subsubsection.2.1.3}{System losses}{subsection.2.1}% 6
+\BOOKMARK [2][-]{subsection.2.2}{Simulation study}{section.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Model of the New England renewable power data center}{subsection.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.3}{Case study}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.4}{Results and discussion}{section.2}% 10
+\BOOKMARK [1][-]{section.3}{Framework for smart placement}{}% 11
+\BOOKMARK [2][-]{subsection.3.1}{Optimization Framework}{section.3}% 12
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Datacenter}{subsection.3.1}% 13
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Wind farm}{subsection.3.1}% 14
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Transmission system}{subsection.3.1}% 15
+\BOOKMARK [3][-]{subsubsection.3.1.4}{Constraints}{subsection.3.1}% 16
+\BOOKMARK [2][-]{subsection.3.2}{Optimizing approaches}{section.3}% 17
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Semi Brute force}{subsection.3.2}% 18
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Heuristic searching}{subsection.3.2}% 19
+\BOOKMARK [1][-]{section.4}{Evaluation experiment}{}% 20
+\BOOKMARK [2][-]{subsection.4.1}{Input data}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.2}{Building one data center with one wind farm}{section.4}% 22
+\BOOKMARK [2][-]{subsection.4.3}{Multiple data centers and wind farms}{section.4}% 23
+\BOOKMARK [1][-]{section.5}{Related Work}{}% 24
+\BOOKMARK [2][-]{subsection.5.1}{Effect of data centers to the grid}{section.5}% 25
+\BOOKMARK [2][-]{subsection.5.2}{Datacenter placement and capacity planning}{section.5}% 26
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 27
+\BOOKMARK [1][-]{section*.13}{References}{}% 28

@@ -147,7 +147,7 @@ Here, we show the simulation results of the three cases and give some discussion
 
 By comparing the values of system losses from Figure~\ref{fig:loss-cases}, it can be observed that the co-location case (Case 2) could lead to more losses than Case 1 and Case 3. Take MEDIUM setting for example, the system losses of Case 3 is about 6\% less than Case 2, which illustrates system loss can be reduced by placing the datacenter correctly and co-location is not necessarily the best choice.
 
-Next,in order to investigate the impact of datacenter placement on line capacity violations and voltage violations, we change the scenario to peak system load (6885MW in total) and conduct the experiments again. Evaluation results are illustrated in Table \ref{tab:results-linevio}, which shows that there is one overloaded branch from bus 4 to bus 5 in Case 2. This highlights that different placement choice of the additional datacenter can make some particular lines overloaded. During our experiments, although there are only a few cases where lines are overloaded, annually the number of times and how long these over-loads could occur depends on the frequency and duration of occurrence of a particular wind speed and load condition. If it is too frequent or more persistent then the over-loads could be a serious problem and might require building new transmission lines. According to \cite{interconnection2010survey}, the estimated cost of building new transmission lines of 345kV voltage level is about \$2.5 Million/mile, which is very expensive with total costs in the billions of dollars. Hence, it's important to choose the right place for datacenters in order to mitigate line over-loading occurrences.
+Next,in order to investigate the impact of datacenter placement on line capacity violations and voltage violations, we change the scenario to peak system load (6885MW in total) and conduct the experiments again. Wind speed setting here is LOW. Evaluation results are illustrated in Table \ref{tab:results-linevio}, which shows that there is one overloaded branch from bus 4 to bus 5 in Case 2. This highlights that different placement choice of the additional datacenter can make some particular lines overloaded. During our experiments, although there are only a few cases where lines are overloaded, annually the number of times and how long these over-loads could occur depends on the frequency and duration of occurrence of a particular wind speed and load condition. If it is too frequent or more persistent then the over-loads could be a serious problem and might require building new transmission lines. According to \cite{interconnection2010survey}, the estimated cost of building new transmission lines of 345kV voltage level is about \$2.5 Million/mile, which is very expensive with total costs in the billions of dollars. Hence, it's important to choose the right place for datacenters in order to mitigate line over-loading occurrences.
 
 
 \begin{table}[ht]
@@ -155,7 +155,7 @@ Next,in order to investigate the impact of datacenter placement on line capacity
 \caption{Results of overloaded lines}
 \begin{tabular}{|c|c|c|}
 \hline
-Case No. & \# of overloaded lines & List of Overloaded Lines \\
+Case No. & \# of overloaded lines & List of overloaded lines \\
 \hline
 1 & 0 & None\\
 2 & 1 &  bus 4 - bus 5 \\
@@ -168,6 +168,30 @@ Case No. & \# of overloaded lines & List of Overloaded Lines \\
 \label{tab:results-linevio}
 \end{center}
 \end{table}
+
+Furthermore, we investigate cases where voltage violations occur, as shown in Table \ref{tab:results-volvio}. Here, the wind speed setting is MEDIUM. For Case 2 the datacenter is located at bus 38 (co-located with wind farm 5), and for Case 3 the datacenter is located at bus 25 (away from wind farms). The acceptable voltage range of a bus is set to [0.95p.u.,1.05p.u.]. It can be observed under this condition, there is already voltage violation occurring with the original New England grid system. Co-locating the datacenter with a wind farm as Case 2 increases the number of violated buses. This result highlights that by placing the datacenter in an appropriate bus carefully might also mitigate voltage violations.
+
+\begin{table}[ht]
+\begin{center}
+\caption{Results of voltage violations}
+\begin{tabular}{|c|c|c|}
+\hline
+Case No. & \# of violated buses & List of violated buses \\
+\hline
+1 & 1 & bus25\\
+\hline
+2 & 4 & \tabincell{c}{bus25\\bus26\\bus28\\bus29}\\
+\hline
+3 & 0 & None \\
+
+\hline
+
+\end{tabular}
+   \vspace{.05in}
+\label{tab:results-volvio}
+\end{center}
+\end{table}
+
 
 Even though we have provided one set of results for a particular set of condition, we have simulated different wind speed and load conditions. We found that in general the system loss magnitude could change. However, in most cases we saw that co-location is not the optimal choice for minimum system loss. In Section \ref{sec:framework} we will describe a method for determining the datacenter location that will correspond to minimal system loss annually and will cover all the wind speed and system load conditions.
 
