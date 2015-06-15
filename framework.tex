@@ -113,53 +113,49 @@ The revenue earned by the wind farm is computed over the time period $T$, where 
 
 \subsubsection{Constraints}
 
-\thunote{Still need to finish the section.}
+The major constraints that must be observed for the above optimization is that there must not be any voltage and transmission line capacity violations.
 
-The outputs of the problem is the lowest cost found and the corresponding locations for datacenters and renewable power plant, as well as the capacity provisioned at each location for datacenters or green power plants (if any).
+\subsection{Solving the Optimization Problem}
 
-Equation 1 in Figure~\ref{fig:optimization} shows the optimization objective of our defined problem, i.e. $TotalCost$, where $DC(l)$ and $RE(l,r)$ are booleans indicating whether to place a datacenter or power plant of type $r$ at location $l$. $DC\_Cost(l)$ , $RE\_Cost(l,r)$ and $Grid\_Cost$ represent the cost for datacenters, renewable plants and the power grid system respectively.
+Currently, we perform a complete search over all possible placement of the datacenter and wind farm to find the best solution to the optimization problem.  This approach works well for the scale that we are studying (e.g., the New England system).  However, as the system scale to much larger sizes, a more scalable approach would eventually be needed.  We leave this for future work.  (Note that the New England system that we study already covers a large area -- most of the North Eastern region of the U.S. and some parts of Canada -- so that it may not be necessary to study much larger systems.) 
 
+% datacenters and renewable power plant, as well as the capacity provisioned at each location for datacenters or green power plants (if any).
 
-The overall cost should be optimized under the constraints, which are listed in Figure~\ref{fig:constraints}. Equation 21-23 show the constraints of the provisioned capacity for datacenters. Equation 24 means that the provisioned capacity for renewable energy plants are determined by the total power demand from the datacenters. This constraint is added indicating that the power generation and consumption added to the grid should be balanced from the perspective of the grid system. Furthermore, Equation 26
-is a strict limitation for keeping the grid out of any violations at any given time $t$, since we assume the grid reliability is crucial and must be guaranteed.
+% The overall cost should be optimized under the constraints, which are listed in Figure~\ref{fig:constraints}. Equation 21-23 show the constraints of the provisioned capacity for datacenters.
 
-\begin{figure*} [ht]
-\begin{small}
-\centering
-\begin{eqnarray}
-\forall_{l \in \mathcal{L}}, capDC(l) \leq DC(l) \cdot CapacityDC
-&\Rightarrow& \text{capacity of datacenter at $l$ should be zero when $DC(l)$ is 0} \\
-\sum_{l\in \mathcal{L}}{DC(l)\cdot capDC(l)} = CapacityDC
-&\Rightarrow& \text{total capacity of built datacenters should meet the requirement} \\
-\forall_{t \in T}, demand(l,t) \leq capDC(l)
-&\Rightarrow& \text{power demand of the datacenter should not exceed its capacity} \\
-%\forall_{l \in \mathcal{L},r\in \mathcal{R}}, capRE(l,r) \leq RE(l,r) \cdot CapacityRE  & \Rightarrow &
-%\text{capacity of type $r$ plant at $l$ should be zero if $RE(l,r)$ is 0} \\
-%\sum_{l \in \mathcal{L},r \in \mathcal{R}}{RE(l,r) \cdot capRE(l,r)} = CapacityRE & \Rightarrow &
-%\text{total capacity of power plant should meet the requirement}\\
-\begin{split}
-\sum_{l \in \mathcal{L},r \in \mathcal{R}}{ RE(l,r) \cdot capRE(l,r) \cdot avg\textit{Eff}(l,r) } = \\
-\sum_{t \in T, l\in \mathcal{L}}{DC(l) \cdot demand(l,t)\cdot PUE(l,t)}
-\end{split}
-&\Rightarrow &\text{the generated green energy should be balanced with consumption} \\
-\forall_{t \in T}, 0 \leq \textit{eff}RE(r,l,t) < 1
-&\Rightarrow&  \text{efficiency of power plant should be between $[0,1)$} \\
-\forall_{t \in T}, numLineVio(t)=0, numVolVio(t)=0
-&\Rightarrow& \text{No violations in each time epoch}
-\end{eqnarray}
-\end{small}
-\caption{Optimization constraints.}
-\label{fig:constraints}
-\end{figure*}
+% Equation 24 means that the provisioned capacity for renewable energy plants are determined by the total power demand from the datacenters. This constraint is added indicating that the power generation and consumption added to the grid should be balanced from the perspective of the grid system.
 
-\subsection{Optimizing approaches}
-\subsubsection{Semi Brute force}
-A time-consuming approach is to generate all of the possible combinations for datacenters and renewable energy plants. However, it is not possible to generate all kinds of capacity provisioning amounts since it's not discrete. Thus, we generate combinations of locations first, and then evenly distribute the total capacity to all of the candidate locations selected. By testing these generated configurations, the approach returns the best one with the lowest total cost. This approach still could be very exhaustive, which needs extremely long time for execution.
+% Furthermore, Equation 26
+% is a strict limitation for keeping the grid out of any violations at any given time $t$, since we assume the grid reliability is crucial and must be guaranteed.
 
-\subsubsection{Heuristic searching}
-
-\xynote{TO DO SOME WORK...}
-
+% \begin{figure*} [ht]
+% \begin{small}
+% \centering
+% \begin{eqnarray}
+% \forall_{l \in \mathcal{L}}, capDC(l) \leq DC(l) \cdot CapacityDC
+% &\Rightarrow& \text{capacity of datacenter at $l$ should be zero when $DC(l)$ is 0} \\
+% \sum_{l\in \mathcal{L}}{DC(l)\cdot capDC(l)} = CapacityDC
+% &\Rightarrow& \text{total capacity of built datacenters should meet the requirement} \\
+% \forall_{t \in T}, demand(l,t) \leq capDC(l)
+% &\Rightarrow& \text{power demand of the datacenter should not exceed its capacity} \\
+% %\forall_{l \in \mathcal{L},r\in \mathcal{R}}, capRE(l,r) \leq RE(l,r) \cdot CapacityRE  & \Rightarrow &
+% %\text{capacity of type $r$ plant at $l$ should be zero if $RE(l,r)$ is 0} \\
+% %\sum_{l \in \mathcal{L},r \in \mathcal{R}}{RE(l,r) \cdot capRE(l,r)} = CapacityRE & \Rightarrow &
+% %\text{total capacity of power plant should meet the requirement}\\
+% \begin{split}
+% \sum_{l \in \mathcal{L},r \in \mathcal{R}}{ RE(l,r) \cdot capRE(l,r) \cdot avg\textit{Eff}(l,r) } = \\
+% \sum_{t \in T, l\in \mathcal{L}}{DC(l) \cdot demand(l,t)\cdot PUE(l,t)}
+% \end{split}
+% &\Rightarrow &\text{the generated green energy should be balanced with consumption} \\
+% \forall_{t \in T}, 0 \leq \textit{eff}RE(r,l,t) < 1
+% &\Rightarrow&  \text{efficiency of power plant should be between $[0,1)$} \\
+% \forall_{t \in T}, numLineVio(t)=0, numVolVio(t)=0
+% &\Rightarrow& \text{No violations in each time epoch}
+% \end{eqnarray}
+% \end{small}
+% \caption{Optimization constraints.}
+% \label{fig:constraints}
+% \end{figure*}
 
 %%% Local Variables:
 %%% mode: latex

@@ -1,9 +1,17 @@
-\section{Evaluation experiment}
+\subsection{Case Study}
 \label{sec:eval}
 
 Now in this section, we study the overall cost for placing datacenters and renewable energy power plants into the same grid network. By considering the grid loss or not, we can get different results of placement decisions.
 
-\subsection{Input data}
+\thunote{Moved the following text here from previous section.  Need to integrate.}
+
+datacenters and renewable power plant, as well as the capacity provisioned at each location for datacenters or green power plants (if any).
+
+Equation 24 means that the provisioned capacity for renewable energy plants are determined by the total power demand from the datacenters. This constraint is added indicating that the power generation and consumption added to the grid should be balanced from the perspective of the grid system.
+
+\thunote{End of moved text.}
+
+\subsubsection{Input data}
 
 The target area here is New England in United States, and we select 56 locations as candidates inside this area, as shown in Figure \ref{fig:NE_locs}. We obtained the Typical Meteorological Year (TMY) information for 56 locations from US Department of Energy (2), which includes a one-year dataset of hourly weather values for a location. We simplify the problem by only considering one type of renewable energy - wind. We computed the average wind power generation using $\beta(l,t)$ derived from the specifications for the 1.5MW Series wind turbine from General Electric Company \cite{GE15MW}, TMY wind speed, TMY air pressures, and conversion losses.
 
@@ -17,7 +25,7 @@ Besides, we collected various data of PUEs, datacenter construction costs, wind 
 \label{fig:NE_locs}
 \end{figure}
 
-\subsection{Building one datacenter with one wind farm}
+\subsubsection{Building one datacenter with one wind farm}
 
 Here, we are trying to solve a simplest case of the defined problem by placing only one datacenter and only one wind farm onto the grid system. The added generation (wind power) and consumption (datacenter load) should be balanced for the grid to keep reliability to the best extent. In this case, we can brute force all of the combinations of locations for the datacenter and the wind farm. Figure \ref{fig:cost1dc1wf} shows the results of the total cost by using five different strategies when seeking the best locations when we are building a 100MW datacenter and a wind farm which can supply green energy for it.
 
@@ -61,8 +69,3 @@ We calculate all of the combinations for wind farm and datacenter locations and 
 \label{tab:costsaving}
 \end{center}
 \end{table}
-
-\subsection{Multiple datacenters and wind farms}
-
-
-\xynote{NEED MORE MORE WORK....}
