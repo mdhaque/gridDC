@@ -1,22 +1,11 @@
 \subsection{Case Study}
 \label{sec:eval}
 
-Now in this section, we study the overall cost for placing datacenters and renewable energy power plants into the same grid network. By considering the grid loss or not, we can get different results of placement decisions.
+We now demonstrate the application of our optimization framework in a case study.  Specifically, we use it to study the placement of a 100MW datacenter and wind farm in the New England transmission network.  Instead of specifying a desired capacity for the wind farm, we assume that we want sufficient wind energy to completely offset the energy consumption of the datacenter (making the size of the wind farm dependent on the weather pattern at its placement location).  This scenario corresponds to when a company wants to build a new datacenter, and a corresponding wind farm to offset the energy use of the datacenter.
 
-\thunote{Moved the following text here from previous section.  Need to integrate.}
+\subsubsection{Instantiating the framework parameters}
 
-datacenters and renewable power plant, as well as the capacity provisioned at each location for datacenters or green power plants (if any).
-
-Equation 24 means that the provisioned capacity for renewable energy plants are determined by the total power demand from the datacenters. This constraint is added indicating that the power generation and consumption added to the grid should be balanced from the perspective of the grid system.
-
-\thunote{End of moved text.}
-
-\subsubsection{Input data}
-
-The target area here is New England in United States, and we select 56 locations as candidates inside this area, as shown in Figure \ref{fig:NE_locs}. We obtained the Typical Meteorological Year (TMY) information for 56 locations from US Department of Energy (2), which includes a one-year dataset of hourly weather values for a location. We simplify the problem by only considering one type of renewable energy - wind. We computed the average wind power generation using $\beta(l,t)$ derived from the specifications for the 1.5MW Series wind turbine from General Electric Company \cite{GE15MW}, TMY wind speed, TMY air pressures, and conversion losses.
-
-Besides, we collected various data of PUEs, datacenter construction costs, wind farm construction costs, land costs, transmission lines and network connection costs and grid energy costs in the same way as stated in \cite{berral2014building}. Specifically, for grid costs, we use $priceLoss$ the same as the maximum electricity price in the whole area. The input data for the grid is derived from the New England grid system, which is shown as in Section \ref{sec:quantify},including all of the settings for buses, branches and generators in it. Thus, the transmission loss, $transLoss(t)$, could be computed by simulating the power flow process for time epoch $t$.  %According to the study in \cite{aman2012ITPD}, we set the distribution loss as 3\% of the average power generation of the added power plant.
-
+The production of wind power and datacenter cooling both depend on weather conditions.  Thus, we obtained Typical Meteorological Year (TMY) information for 56 locations in the U.S. New England area as shown in Figure~\ref{fig:NE_locs}.  A TMY is a 1-year dataset of hourly weather values selected to include a representative range of weather phenomena for a location, while still giving annual averages that are consistent with the long-term averages for the location.  The TMY data is obtained from US Department of Energy.\footnote{\url{http://apps1.eere.energy.gov/buildings/energyplus/weatherdata about.cfm}} We use the TMY wind speeds and air pressures, conversion losses, and specifications for the 1.5MW Series wind turbine from General Electric Company \cite{GE15MW} to compute $\beta(l,t)$ at each location $l$ during time epoch $t$.
 
 \begin{figure}[ht]
 \centering
@@ -25,9 +14,38 @@ Besides, we collected various data of PUEs, datacenter construction costs, wind 
 \label{fig:NE_locs}
 \end{figure}
 
-\subsubsection{Building one datacenter with one wind farm}
+We adopt the values and approaches for computing PUE, datacenter construction costs, wind farm construction costs, land costs, transmission lines and network connection costs, and grid energy costs from \cite{berral2014building}.  \thunote{I think we need a summary table here to give information.}
 
-Here, we are trying to solve a simplest case of the defined problem by placing only one datacenter and only one wind farm onto the grid system. The added generation (wind power) and consumption (datacenter load) should be balanced for the grid to keep reliability to the best extent. In this case, we can brute force all of the combinations of locations for the datacenter and the wind farm. Figure \ref{fig:cost1dc1wf} shows the results of the total cost by using five different strategies when seeking the best locations when we are building a 100MW datacenter and a wind farm which can supply green energy for it.
+\thunote{Xiaoying, what is the assumed load?  What about the datacenter load ($powNeed$)}
+For each time epoch $t$, we compute the wind energy being generated by all the wind farms (existing ones and the new one being placed) using $\beta(l,t)$.  We then compute the system loss for the time epoch for the placement of the new datacenter and wind farm at locations $d$ and $w$, respectively, using the simulation approach described in Section~\ref{sec:quantify}.  For each possible pair of ($l$, $w$), we sum the transmission loss over the entire year.
+
+Finally, for the cost of system transmission loss, we set $priceLoss$ to the maximum electricity price in the whole area.  \thunote{Xiaoying, Divya gave us some values that we can use here.  Did we use these new values, or are we still using the maximum electricity price?}
+
+\subsubsection{Placement approach}
+
+To see the impact of considering transmission loss, as well as the simultaneous placement of datacenter and wind farm, we compare results for five different placement approaches:
+
+\begin{itemize}
+
+\item \textbf{DC\_WF\_OPT:} This strategy individually looks for the best location to put the datacenter and the wind farm; i.e., it solves the optimization problem for the datacenter without considering the new wind farm, and then solves the optimization problem again for the wind farm without considering the new datacenter.  This strategy also ignore transmission loss.
+
+\item \textbf{DC+G\_WF+G:} This strategy is the same as DC\_WF\_OPT except that transmission loss is considered when solving the optimization problem.
+
+\item \textbf{Min\_Loss:} This strategy finds locations for the datacenter and wind farm that minimizes the cost of transmission loss.
+
+\item \textbf{Co-location:} This strategy assumes that the datacenter and wind farm 
+should be co-located, and so finds a single location for both that minimizes the overall cost.
+
+\item \textbf{Joint:} This strategy considers the simultaneous placement of the datacenter and wind farm, and uses all of the costs and revenues in the optimization framework.
+
+\end{itemize}
+
+\subsubsection{Results}
+Figure \ref{fig:cost1dc1wf} shows the results of the total cost by using five different strategies when seeking the best locations when we are building a 100MW datacenter and a wind farm which can supply green energy for it.
+
+From the figure, we can see that by considering grid costs, the total cost will be further saved compared to best choices for the datacenter and the wind farm separately. Also, $Min\_Loss$ can achieve minimal losses of all possible choices, but the total cost is large mainly because it selects an expensive place for purchasing land for the wind farm. The best choice of co-location options is also nearly 7\% higher than the $Jointly$ choice, and it's easy to understand since the best location for datacenter is not necessarily the best for wind farm and vice versa.
+
+We calculate all of the combinations for wind farm and datacenter locations and use the average total cost of these combinations (which is \$667.1M per year) as the baseline for comparison. Then, the locations found and the corresponding cost savings of the five strategies are listed in Table \ref{tab:costsaving}.
 
 \begin{figure}[ht]
 \centering
@@ -35,22 +53,6 @@ Here, we are trying to solve a simplest case of the defined problem by placing o
 \caption{Costs of building one datacenter (100MW) with one wind farm}
 \label{fig:cost1dc1wf}
 \end{figure}
-
-The five different strategies are explained as follows:
-
-(1)\textbf{DC\_WF\_OPT.} This strategy tries to seek for the best location for the datacenter where its total cost could be minimized, and the best location for the wind farm where its total cost could be minimized. \xynote {According to Divya, today there are standard methods used to determine the best location for wind farms. So are you suggesting us to focus on the placement of datacenters only? } Grid costs are not considered here.
-
-(2)\textbf{DC+G\_WF+G.} Since only putting datacenter or wind farm into the grid will change the power flow, this strategy tries to add the transmission loss costs into consideration when seeking for best locations separately for the datacenter and the wind farm.
-
-(3)\textbf{Jointly.} All of the combinations of locations are exploited by using this strategy to seek for the jointly placement choice for both the datacenter and the wind farm, considering the total cost as calculated by Equation 2.
-
-(4)\textbf{Min\_Loss.} Here, this strategy seeks for the locations for datacenter and wind farm which can lead to the minimal grid losses cost.
-
-(5)\textbf{Co-location.} Assuming the the datacenter should be build together with an on-site wind farm, this strategy seeks for one location to place both the datacenter and the wind farm towards minimizing the total cost.
-
-From the figure, we can see that by considering grid costs, the total cost will be further saved compared to best choices for the datacenter and the wind farm separately. Also, $Min\_Loss$ can achieve minimal losses of all possible choices, but the total cost is large mainly because it selects an expensive place for purchasing land for the wind farm. The best choice of co-location options is also nearly 7\% higher than the $Jointly$ choice, and it's easy to understand since the best location for datacenter is not necessarily the best for wind farm and vice versa.
-
-We calculate all of the combinations for wind farm and datacenter locations and use the average total cost of these combinations (which is \$667.1M per year) as the baseline for comparison. Then, the locations found and the corresponding cost savings of the five strategies are listed in Table \ref{tab:costsaving}.
 
 \begin{table}[ht]
 \begin{center}
@@ -69,3 +71,8 @@ We calculate all of the combinations for wind farm and datacenter locations and 
 \label{tab:costsaving}
 \end{center}
 \end{table}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

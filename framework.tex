@@ -1,19 +1,9 @@
-\section{Framework for smart placement}
+\section{Cost-based Placement}
 \label{sec:framework}
 
-\thunote{I have not yet worked on these introductory paragraphs.  Will change next to reflect Divya's comments.}
-The previous section highlights that placing datacenters and wind
-farms has obvious impact on the grid transmission network system. Thus,
-when a service provider is looking for best locations to establish a
-network of green datacenters, the grid operational cost should also
-be included as one of the most important factors into
-consideration. Another observation is that co-location of the green
-datacenter and the green energy plant seems not always be the best
-choice. In this case, we try to study how to seek the best locations
-for both the datacenter and the green energy plant, which are
-designed to be connected to the same grid network.
+As shown in the last section, the placement of new datacenters and wind farms can have significant impact on a grid transmission system.  Thus, in this section, we develop a framework for finding the best possible placement.  For simplicity, we assume that one datacenter and one wind farm are being placed in the system simultaneously.  Our framework can be easily extended to account for the simultaneous placement of multiple datacenters and multiple wind farms; of course, solving the optimization problem will become much more challenging for such cases.  Our optimization seek to find locations for the datacenter and wind farm that lead to the lowest total cost for construction and operation.  The overall framework is based on computing the cost throughout a year, using amortized capital costs and operational costs for the datacenter and operational revenue of the wind farm, along with system loss in the transmission network.
 
-By grid-aware placement, we attempt to efficiently select a set of locations for one or more datacenters to support a given amount of computational power, as well as one or more green power plants (e.g. solar, wind or others) to provide a given power capacity. The main goal is to minimize the overall cost for datacenters, green power plants and also the grid network operation. The next subsections defines some important parameters in the selection procedure. Then, the cost model and the entire optimization problem will be formulated and described.
+% By grid-aware placement, we attempt to efficiently select a set of locations for one or more datacenters to support a given amount of computational power, as well as one or more green power plants (e.g. solar, wind or others) to provide a given power capacity. The main goal is to minimize the overall cost for datacenters, green power plants and also the grid network operation. The next subsections defines some important parameters in the selection procedure. Then, the cost model and the entire optimization problem will be formulated and described.
 
 \begin{table}[ht]
 \caption{Framework parameters.  $l$ is a location, and $t$ is a time period.}
@@ -60,9 +50,6 @@ $pTransLoss$ & the price for system transmission losses per kWh & \$/kWh \\
 \end{table}
 
 \subsection{Optimization Framework}
-
-\thunote{Need to integrate this thought below.}
-The problem is set up from the perspective of both IT company and the grid operator, who want to collaborate for building up green datacenters, with the purpose of minimizing the summarized cost including datacenter cost, green power plant cost and the grid cost.
 
 Table \ref{tab:par_setting} lists the set of parameters in our framework.  Using these parameters, we define the optimization problem shown in Figure~\ref{fig:optimization}.  The objective of this optimization problem is to minimize the total cost ($totalCost$) of building and operating a datacenter of a given size ($dcCapacity$) and a wind farm of a given size ($wfCapacity$). %\xynote{In the program, wind farm size is not given but calculated based on the datacenter size and other location-dependent parameters.}
 The datacenter and wind farm can each be placed at any location within a set of given locations.  The total cost has three components, the cost of the datacenter ($dcCost$), the cost of the wind farm ($wfCost$), and the cost of losses in the transmission system ($transCost$).
