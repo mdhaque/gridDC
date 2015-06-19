@@ -83,11 +83,11 @@ The wind farms connected to bus 18, 28, 36, 37 and 38 (Figure~\ref{fig:newenglan
 \hline
 WF No. & Bus No. & State & Capacity(MW) \\
 \hline
-WF1 & 18& \xynote{?} & 100\\
-WF2 & 28& \xynote{?} & 90 \\
+WF1 & 18& New Hampshire & 100\\
+WF2 & 28& Maine & 90 \\
 WF3 & 36& Vermont & 90  \\
 WF4 & 37& Maine & 90\\
-WF5 & 30& Massachusetts(\xynote{?}) & 90\\
+WF5 & 38& Massachusetts & 90\\
 \hline
 
 \end{tabular}
@@ -104,7 +104,7 @@ We have used the above described model and carried out the following case studie
 \item{Case 2: New England system with one additional datacenter (co-located with a wind farm)}
 \item{Case 3: New England system with one additional datacenter (located away from the wind farm)}
 \end{itemize}
-For assessing the impact, we use the three metrics described earlier (section \ref{sec:metrics}) and calculate the system losses, power flows through the transmission lines and the bus voltages.
+For assessing the impact, we use the three metrics described earlier (section \ref{sec:intro}) and calculate the system losses, power flows through the transmission lines and the bus voltages.
 The system losses, line flows and the bus voltages are calculated by solving the power flow or loadflow equations. The loadflow equations mathematically model the power balance (i.e., net load +losses = total generation in the electric grid). Within an electric grid the power can be easily measured at the loads and at generators. Also, some generators have the capability to regulate the voltage at a bus at a constant preset reference value. The power flow equations are used to calculate the bus voltages (magnitude and angle), for a given network and a set of load and generation powers. The loadflow equation for a generic $n$ bus network with $k$ branches is given below.
 \begin{equation}
 P_{i} = \Sigma_{j=1}^{n}(|Y_{ij}||V_{i}||V_{j}|cos(\theta_{ij}+\delta_{j}-\delta_{i})
