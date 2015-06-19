@@ -43,6 +43,11 @@ $transLoss(t)$  & avg system transmission loss in grid during $t$ & kW \\
 $pTransLoss$ & the price for system transmission losses per kWh & \$/kWh \\
 %$numLineVio(t)$  & the number of line capacity violation during time epoch $t$   &  \#  \\
 %$numVolVio(t)$  & the number of voltage level violation during time epoch $t$  &  \#  \\
+$V_i$ & the voltage level of the $i$th bus & p.u. \\
+$V^{min}_i$ & the minimum accepted voltage of the $i$th bus &p.u.\\
+$V^{max}_i$ & the maximum accepted voltage of the $i$th bus & p.u. \\
+$P_k$ & the current line flow on the $k$th branch & MW \\
+$P^{max}_k$ & the maximum allowed line flow of the $k$th branch & MW \\
 \hline
 \end{tabular}
 \label{tab:par_setting}
@@ -55,8 +60,14 @@ Table \ref{tab:par_setting} lists the set of parameters in our framework.  Using
 The datacenter and wind farm can each be placed at any location within a set of given locations.  The total cost has three components, the cost of the datacenter ($dcCost$), the cost of the wind farm ($wfCost$), and the cost of losses in the transmission system ($transCost$).
 
 \begin{figure*}
+Minimize $totalCost$ subject to
 \begin{eqnarray}
-	totalCost & = & dcCost + wfCost + transCost \\
+V^{min}_i  \leq  V_i \leq V^{max}_i\\
+P_k \leq P^{max}_k
+\end{eqnarray}
+where
+\begin{eqnarray}
+ 	totalCost & = & dcCost + wfCost + transCost \\
 	dcCost & = & dcCAPEX + dcOPEX \\
         dcCAPEX & = & dcLandCost + dcBuildCost + dcITCost \\
         dcOPEX & = & dcNetCost + dcEnergyCost \\
@@ -76,7 +87,7 @@ The datacenter and wind farm can each be placed at any location within a set of 
         wfBuildCost & = & pBuildWF \cdot wfCapicity + cLinePow(w) \\
         wfRev & = & revEnergy(w) \cdot  \sum_{t \in T}{ |t| \cdot
             \beta(w,t) \cdot wfCapicity } \\
-        transCost & = & pTransLoss \cdot \sum_{t \in T}{ |t| \cdot transLoss(t)} \\% + disLoss(t))}\\
+        transCost & = & pTransLoss \cdot \sum_{t \in T}{ |t| \cdot transLoss(t)} % + disLoss(t))}\\
 \end{eqnarray}
 \caption{Optimization framework.  The datacenter is placed at location $d$ and the windfarm is placed at location $w$.  The objective is to minimize $totalCost$ for a given time period $T$ (divided into epochs denoted by $t$) and a set of possible locations for $d$ and $w$.  $|t|$ denotes the length of epoch $t$.}
 \label{fig:optimization}
