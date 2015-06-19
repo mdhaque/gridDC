@@ -5,21 +5,6 @@
 %%%%%%%
 Planning optimal datacenter location, requires comprehensive metric definition. Most of the studies carried out so far neglect the impact of renewable powered datacenters on the transmission grid. When the penetration of renewable powered datacenters was small, the impact of these on the transmission grid was insignificant. However, with several large datacenter companies opting for renewable energy source it becomes imperative to study their impact on the transmission grid.
 
-\subsection{Impact of datacenter on renewable power grid}
-\label{sec:metrics}
-We will show that choosing optimal datacenter location within the renewable power grid could be beneficial to both the grid operators and the datacenter owners. Specifically datacenters located at strategic places in the grid could help minimize i) overloading of transmission lines; ii) grid voltage variations outside the acceptable range iii) system losses. We will demonstrate this by considering a real world system, i.e., the New England Independent System Operator (ISO) spanning most of North Eastern region of United States and some parts of Canada.
-\subsubsection{Overloading of transmission lines}
-The transmission lines (referred as branch hereafter in the paper) are used to transport power from the large generators to the load. The power carrying capacity is limited to protect the line from over heating, mainly due to the line resistive losses i.e., $I^{2}R$, where $I$ is the current flowing through the branch and $R$ is the resistance of the branch.
-
-A transmission line has typically two ratings: short term and long term capacity rating. During certain wind and system load (including datacenter load) conditions, some of the transmission lines could get overloaded. If this happens during the normal operation of the electric grid then one of the following will be done: i) if an electronic power flow controller is available then it is used to control the power flow through the overloaded line; or ii) in extreme situations, the overloaded line is disconnected which may result in power supply interruption to the loads.
-
-If major transmission lines are getting overloaded quiet often annually then new lines are planned and built. This solution is very expensive and takes a long time (typically 7 to 10 years). The need for such expensive grid retrofits may be minimized by planning the location of the datacenter.
-
-\subsubsection{Voltage variation in electric grid}
-The voltage magnitude varies in the electric grid and needs to be maintained within a narrow range (for example +/- 5\% of nominal) so that there is no damaged caused to the sensitive electronic loads. However, sometimes/days the change in renewable power output could cause the voltage to vary beyond the acceptable limits. Such over/under voltage problems can be mitigated by appropriately locating the datacenter load.
-
-\subsubsection{System losses}
-Historically, the electric grid was designed to have large central generating stations that are located far away from the load centers. The power from these central sources would be transmitted to the datacenter over transmission lines. While designing such a grid, the generator location and the transmission line voltage level as well as the path would be optimized to minimize the line losses.However, today with renewable power being distributed the scenario has changed, the generation sources are distributed and they may be located near the load centers. In order to transfer power from these renewable source we still use the existing transmission lines that were planned and built about 50 years ago or earlier. This may result in higher line losses and sub-optimal power transmission between generation sources and loads. Since we cannot re-design the entire electric grid to minimize line losses, we need to leverage the flexibility we have in locating new loads i.e., datacenters in our specific case.
 
 \subsection{Simulation study}
 In order to study the impact of datacenter location in a renewable power grid we consider the New England ISO transmission network. We choose this system due to the following reasons:
