@@ -52,6 +52,7 @@ $pTransLoss$ & the price for system transmission losses per kWh & \$/kWh \\
 \end{tabular}
 \label{tab:par_setting}
 \end{center}
+\vspace{-0.1in}
 \end{table}
 
 \subsection{Optimization Framework}
@@ -66,6 +67,7 @@ The datacenter and wind farm can each be placed at any location within a set of 
 % P_k \leq P^{max}_k
 % \end{eqnarray}
 % where
+{\small
 \begin{eqnarray}
  	totalCost & = & dcCost + wfCost + transCost \\
 	dcCost & = & dcCAPEX + dcOPEX \\
@@ -89,8 +91,10 @@ The datacenter and wind farm can each be placed at any location within a set of 
             \beta(w,t) \cdot wfCapicity } \\
         transCost & = & pTransLoss \cdot \sum_{t \in T}{ |t| \cdot transLoss(t)} % + disLoss(t))}\\
 \end{eqnarray}
+}
 \caption{Optimization framework with objective of minimizing $totalCost$.  The datacenter is placed at location $d$ and the windfarm is placed at location $w$.  The objective is to minimize $totalCost$ for a given time period $T$ (divided into epochs denoted by $t$) and a set of possible locations for $d$ and $w$.  $|t|$ denotes the length of epoch $t$.}
 \label{fig:optimization}
+\vspace{-0.2in}
 \end{figure*}
 
 

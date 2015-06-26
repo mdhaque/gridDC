@@ -18,7 +18,7 @@ The production of wind power and datacenter cooling both depend on weather condi
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=1\columnwidth]{img/NE_map}
+\includegraphics[width=0.8\columnwidth]{img/NE_map}
 \caption{Candidate locations in New England}
 \label{fig:NE_locs}
 \end{figure}
@@ -57,6 +57,7 @@ Average $\beta$ (\%) &11.7&2.7&	40&	15.9&56.8 \\
 \end{tabular}
 \label{tab:loc-dependent-pars}
 \end{center}
+\vspace{-0.1in}
 \end{table}
 
 \begin{table}[ht]
@@ -118,6 +119,14 @@ should be co-located, and so finds a single location for both that minimizes the
 \textbf{Jointly:} This strategy considers the simultaneous placement of the datacenter and wind farm, and uses all of the costs and revenues in the optimization framework.
 
 \subsubsection{Results}
+
+Given the constraints that overloading of transmission lines and
+unacceptable voltage variations must be avoided, {\em all placements
+  found by all strategies completely met this constraint throughout
+  the simulated year}.  This is an important finding since overloading
+of transmission lines and unacceptable voltage variations can have
+serious consequences as already discussed.
+
 Figure \ref{fig:cost1dc1wf} shows the resulting total cost when using
 the five different placement strategies.  It is easy to see that not
 considering transmission system losses (DC\_WF\_OPT), considering only
@@ -133,10 +142,11 @@ to lowest overall cost.
 %\thunote{We cannot use this \$663M as the baseline.  Use the co-location as the baseline.}
 The locations found and the total cost achieved by the five
 strategies are listed in Table \ref{tab:costsaving}. It can be seen that 
-by considering the system losses of the electric grid, up to 7.7\% cost could be saved 
-through {\em Jointly} compared to the {\em Co-location} strategy. However, only considering
-the system losses might lead to more cost as shown by the {\em Min\_Loss} strategy, since
-the cost of the datacenter and the wind farm is much higher.
+considering the system losses of the transmission system (Jointly) leads to
+ 8\% cost 
+savings compared to simply co-locating the datacenter and wind farm
+(Co-location), and 3.4\% savings compared to ignoring the impact on
+the transmission system.
 
 \begin{figure}[ht]
 \centering
@@ -167,6 +177,7 @@ the cost of the datacenter and the wind farm is much higher.
 \end{tabular}
 \label{tab:costsaving}
 \end{center}
+\vspace{-0.2in}
 \end{table}
 
 %%% Local Variables:
