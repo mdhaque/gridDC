@@ -10,17 +10,17 @@ In this section, we first discuss different ways that the placement of renewable
 
 \subsection{Potential Impacts}
 
-The rapidly increasing penetration of large renewable powered datacenters can potentially impact the powder grid in several ways.
+The rapidly increasing penetration of large renewable powered datacenters can potentially impact the power grid in several ways.
 
 \subsubsection{Overloading of transmission lines}
 The transmission lines (referred as branch hereafter in the paper) are used to transport power from the large generators to the load. The power carrying capacity is limited to protect the line from over heating, mainly due to the line resistive losses, i.e., $I^{2}R$, where $I$ is the current flowing through the branch and $R$ is the resistance of the branch.
 
 A transmission line has typically two ratings: short term and long term capacity rating. During certain wind and system load (including datacenter load) conditions, some of the transmission lines could get overloaded. If this happens during the normal operation of the electric grid then one of the following will be done: i) if an electronic power flow controller is available then it is used to control the power flow through the overloaded line; or ii) in extreme situations, the overloaded line is disconnected which may result in power supply interruption to the loads.
 
-If major transmission lines are getting overloaded quiet often annually then new lines are planned and built.  As already mentioned, this solution is very expensive and takes a long time. The need for such expensive grid retrofits may be minimized by planning the location of large new loads such as datacenters.
+If major transmission lines are getting overloaded quite often annually then new lines are planned and built.  As already mentioned, this solution is very expensive and takes a long time. The need for such expensive grid retrofits may be minimized by planning the location of large new loads such as datacenters.
 
 \subsubsection{Voltage variation in electric grid}
-The voltage magnitude varies in the electric grid and needs to be maintained within a narrow range (for example +/- 5\% of nominal) so that there is no damaged caused to the sensitive electronic loads. However, sometimes/days the change in renewable power output could cause the voltage to vary beyond the acceptable limits. Such over/under voltage problems can be mitigated by appropriately locating new renewable powered datacenters.
+The voltage magnitude varies in the electric grid and needs to be maintained within a narrow range (for example +/- 5\% of nominal) so that there is no damage caused to the sensitive electronic loads. However, sometimes/days the change in renewable power output could cause the voltage to vary beyond the acceptable limits. Such over/under voltage problems can be mitigated by appropriately locating new renewable powered datacenters.
 
 \subsubsection{System losses}
 Historically, the electric grid was designed to have large central generating stations that are located far away from the load centers. The power from these central sources would be transmitted to the datacenter over transmission lines. While designing such a grid, the generator location and the transmission line voltage level as well as the path would be optimized to minimize the line losses.  However, today with renewable power being distributed the scenario has changed, the generation sources are distributed and they may be located near the load centers. In order to transfer power from these renewable source we still use the existing transmission lines that were planned and built about 50 years ago or earlier. This may result in higher line losses and sub-optimal power transmission between generation sources and loads. Since we cannot re-design the entire electric grid to minimize line losses, we need to leverage the flexibility we have in locating new loads, i.e., renewable powered datacenters in our specific case.
@@ -53,7 +53,7 @@ For our study we considered a widely used  \cite{bills1970line} model of the New
 \end{figure}
 %%%
 
-{\em Datacenter model:} Since the model of the New England system was created, large datacenters have been added to the region.  To account for this added new load, we collected information on datacenters in the area from~\cite{DCmap}.  Then, using a mapping of the buses in the model to geographic locations, we aggregate all the datacenters in the New England ISO region into six datacenters, each representing datacenters in a state, and placed each aggregated datacenter on a bus appropriate for that state. In order to estimate the size of an "aggregated" datacenter in a certain state, we use the follow equation:
+{\em Datacenter model:} Since the model of the New England system was created, large datacenters have been added to the region.  To account for this added new load, we collected information on datacenters in the area from~\cite{DCmap}.  Then, using a mapping of the buses in the model to geographic locations, we aggregate all the datacenters in the New England ISO region into six datacenters, each representing datacenters in a state, and placed each aggregated datacenter on a bus appropriate for that state. In order to estimate the size of an "aggregated" datacenter in a certain state, we use the following equation:
 
 \begin{equation}
 L_i=\frac{n_i*9.8GW}{1278}
