@@ -10,17 +10,17 @@ In this section, we first discuss different ways that the placement of renewable
 
 \subsection{Potential Impacts}
 
-The rapidly increasing penetration of large renewable powered datacenters can potentially impact the powder grid in several ways.
+The rapidly increasing penetration of large renewable powered datacenters can potentially impact the power grid in several ways.
 
 \subsubsection{Overloading of transmission lines}
 The transmission lines (referred as branch hereafter in the paper) are used to transport power from the large generators to the load. The power carrying capacity is limited to protect the line from over heating, mainly due to the line resistive losses, i.e., $I^{2}R$, where $I$ is the current flowing through the branch and $R$ is the resistance of the branch.
 
 A transmission line has typically two ratings: short term and long term capacity rating. During certain wind and system load (including datacenter load) conditions, some of the transmission lines could get overloaded. If this happens during the normal operation of the electric grid then one of the following will be done: i) if an electronic power flow controller is available then it is used to control the power flow through the overloaded line; or ii) in extreme situations, the overloaded line is disconnected which may result in power supply interruption to the loads.
 
-If major transmission lines are getting overloaded quiet often annually then new lines are planned and built.  As already mentioned, this solution is very expensive and takes a long time. The need for such expensive grid retrofits may be minimized by planning the location of large new loads such as datacenters.
+If major transmission lines are getting overloaded quite often annually then new lines are planned and built.  As already mentioned, this solution is very expensive and takes a long time. The need for such expensive grid retrofits may be minimized by planning the location of large new loads such as datacenters.
 
 \subsubsection{Voltage variation in electric grid}
-The voltage magnitude varies in the electric grid and needs to be maintained within a narrow range (for example +/- 5\% of nominal) so that there is no damaged caused to the sensitive electronic loads. However, sometimes/days the change in renewable power output could cause the voltage to vary beyond the acceptable limits. Such over/under voltage problems can be mitigated by appropriately locating new renewable powered datacenters.
+The voltage magnitude varies in the electric grid and needs to be maintained within a narrow range (for example +/- 5\% of nominal) so that there is no damage caused to the sensitive electronic loads. However, sometimes/days the change in renewable power output could cause the voltage to vary beyond the acceptable limits. Such over/under voltage problems can be mitigated by appropriately locating new renewable powered datacenters.
 
 \subsubsection{System losses}
 Historically, the electric grid was designed to have large central generating stations that are located far away from the load centers. The power from these central sources would be transmitted to the datacenter over transmission lines. While designing such a grid, the generator location and the transmission line voltage level as well as the path would be optimized to minimize the line losses.  However, today with renewable power being distributed the scenario has changed, the generation sources are distributed and they may be located near the load centers. In order to transfer power from these renewable source we still use the existing transmission lines that were planned and built about 50 years ago or earlier. This may result in higher line losses and sub-optimal power transmission between generation sources and loads. Since we cannot re-design the entire electric grid to minimize line losses, we need to leverage the flexibility we have in locating new loads, i.e., renewable powered datacenters in our specific case.
@@ -53,7 +53,7 @@ For our study we considered a widely used  \cite{bills1970line} model of the New
 \end{figure}
 %%%
 
-{\em Datacenter model:} Since the model of the New England system was created, large datacenters have been added to the region.  To account for this added new load, we collected information on datacenters in the area from~\cite{DCmap}.  Then, using a mapping of the buses in the model to geographic locations, we aggregate all the datacenters in the New England ISO region into six datacenters, each representing datacenters in a state, and placed each aggregated datacenter on a bus appropriate for that state. In order to estimate the size of an "aggregated" datacenter in a certain state, we use the follow equation:
+{\em Datacenter model:} Since the model of the New England system was created, large datacenters have been added to the region.  To account for this added new load, we collected information on datacenters in the area from~\cite{DCmap}.  Then, using a mapping of the buses in the model to geographic locations, we aggregate all the datacenters in the New England ISO region into six datacenters, each representing datacenters in a state, and placed each aggregated datacenter on a bus appropriate for that state. In order to estimate the size of an "aggregated" datacenter in a certain state, we use the following equation:
 
 \begin{equation}
 L_i=\frac{n_i*9.8GW}{1278}
@@ -85,7 +85,7 @@ DC6 & Massachusetts & 27& 300.21 & 4 \\
 \end{table}
 
 
-{\em Wind farm model:}  We have similarly added wind farms to the model to represent recent penetration of wind energy.  Specifically, lumped models of several wind farms within geographical regions have been connected to bus 18, 28, 36, 37 and 38. The locations and capacity settings of the five wind farms are presented in Table~\ref{tab:wf_setting}. We assume that each farm can be represented by `$n$' identical wind turbines, where $n$= total farm rated capacity/individual wind turbine rating. This approximation does not change any of our results because we are interested in studying the global impact of wind farm powered datacenters on the electric grid. Also, since most of the wind turbines in this region are the GE 1.5MW machines, we consider the GE machine wind speed versus power characteristics \cite{lei2006modeling}.  For this particular turbine model, the cut-in wind speed, i.e., the wind speed at which the turbine starts producing power, is 5m/s and the cut-off wind speed is 25m/s, beyond which the turbine will be shut down for safety reasons. The wind turbine produces rated output that grows linearly from near 0MW to 1.2MW for wind speeds from 6m/s to 10m/s, then more slowly to reach the top rated output of
+{\em Wind farm model:}  We have similarly added wind farms to the model to represent recent penetration of wind energy.  Specifically, lumped models of several wind farms within geographical regions have been connected to bus 18, 28, 36, 37 and 38. \red{Note that the wind farms don't have energy storage equipped and the wind energy will be directly penetrated into the grid.} The locations and capacity settings of the five wind farms are presented in Table~\ref{tab:wf_setting}. We assume that each farm can be represented by `$n$' identical wind turbines, where $n$= total farm rated capacity/individual wind turbine rating. This approximation does not change any of our results because we are interested in studying the global impact of wind farm powered datacenters on the electric grid. Also, since most of the wind turbines in this region are the GE 1.5MW machines, we consider the GE machine wind speed versus power characteristics \cite{lei2006modeling}.  For this particular turbine model, the cut-in wind speed, i.e., the wind speed at which the turbine starts producing power, is 5m/s and the cut-off wind speed is 25m/s, beyond which the turbine will be shut down for safety reasons. The wind turbine produces rated output that grows linearly from near 0MW to 1.2MW for wind speeds from 6m/s to 10m/s, then more slowly to reach the top rated output of
 1.5MW between wind speeds of 13-25m/s.
 
 %  From Figure~\ref{fig:windcurve} we can see that the cut-in wind speed,
@@ -120,13 +120,14 @@ WF5 & 38& Massachusetts & 90\\
 \end{table}
 
 \subsection{Case study}
+\label{sec:casestudy}
 We have used the above described model and carried out the following case studies to assess the impact of datacenter location on the renewable power grid.
 \begin{itemize}
 \item{Case 1: Existing New England system}
 \item{Case 2: New England system with one additional datacenter (co-located with a wind farm)}
 \item{Case 3: New England system with one additional datacenter (located away from the wind farm)}
 \end{itemize}
-For assessing the impact, we use the three metrics described earlier (section \ref{sec:intro}) and calculate the system losses, power flows through the transmission lines and the bus voltages.
+\red{Specifically, the wind farm is assumed to have the same characteristics no matter it's co-located with or located away from the datacenter.} For assessing the impact, we use the three metrics described earlier (section \ref{sec:intro}) and calculate the system losses, power flows through the transmission lines and the bus voltages.
 The system losses, line flows and the bus voltages are calculated by solving the power flow or loadflow equations. The loadflow equations mathematically model the power balance (i.e., net load +losses = total generation in the electric grid). Within an electric grid the power can be easily measured at the loads and at generators. Also, some generators have the capability to regulate the voltage at a bus at a constant preset reference value. The power flow equations are used to calculate the bus voltages (magnitude and angle), for a given network and a set of load and generation powers. The loadflow equation for a generic $n$ bus network with $k$ branches is given below.
 \begin{equation}
 P_{i} = \Sigma_{j=1}^{n}(|Y_{ij}||V_{i}||V_{j}|cos(\theta_{ij}+\delta_{j}-\delta_{i})
@@ -145,7 +146,7 @@ For a given power $P_{i}$ and $Q_{i}$ at the $i^{th}$ load bus, the above powerf
 
 Here, with respect to the three cases mentioned above, we calculate line power flows, bus voltages and the value of system losses respectively by conducting simulation experiments, and then discuss the results under the condition of different placement choices for the datacenter.
 
-First, we perform the experiment using peak system load (6885MW in total) and gain an insight of the impact of datacenter placement on line overloading situations. Wind speed setting here is LOW (4-6m/s), which means the power generated by the wind farm is nearly zero (less than 2.3\% of the rated capacity). Evaluation results are illustrated in Table \ref{tab:results-linevio}, which shows that there is one overloaded branch from bus 4 to bus 5 in Case 2. This highlights that different placement choice of the additional datacenter can make some particular lines overloaded. During our experiments, although there are only a few cases where lines are overloaded, annually the number of times and how long these over-loads could occur depends on the frequency and duration of occurrence of a particular wind speed and load condition. If it is too frequent or more persistent then the over-loads could be a serious problem and might require building new transmission lines. According to \cite{interconnection2010survey}, the estimated cost of building new transmission lines of 345kV voltage level is about \$2.5 Million/mile, which is very expensive with total costs in the billions of dollars. Hence, it's important to choose the right place for datacenters in order to mitigate line over-loading occurrences.
+First, we perform the experiment using peak system load (6885MW in total) and gain an insight of the impact of datacenter placement on line overloading situations. Wind speed setting here is LOW (4-6m/s), which means the power generated by the wind farm is nearly zero (less than 2.3\% of the rated capacity). \red{For Case 2 the datacenter is located at bus 18 (co-located with wind farm 1), and for Case 3 the datacenter is located at bus 10 (away from wind farms)}. Evaluation results are illustrated in Table \ref{tab:results-linevio}, which shows that there is one overloaded branch from bus 4 to bus 5 in Case 2. \red{By observing details, we found that the power flow from bus 3 to bus 18 is larger in Case 2 than in Case 3. At the same time, the power flow from bus 4 to bus 3 and from bus 5 to bus 4 also increase when the datacenter is moved from bus 10 to bus 18, which results in line overloading on the branch 5-4. }This highlights that different placement choice of the additional datacenter can make some particular lines overloaded. During our experiments, although there are only a few cases where lines are overloaded, annually the number of times and how long these over-loads could occur depends on the frequency and duration of occurrence of a particular wind speed and load condition. If it is too frequent or more persistent then the over-loads could be a serious problem and might require building new transmission lines. According to \cite{interconnection2010survey}, the estimated cost of building new transmission lines of 345kV voltage level is about \$2.5 Million/mile, which is very expensive with total costs in the billions of dollars. Hence, it's important to choose the right place for datacenters in order to mitigate line overloading occurrences.
 
 
 \begin{table}[ht]
@@ -162,12 +163,12 @@ Case No. & \# of overloaded lines & List of overloaded lines \\
 \hline
 
 \end{tabular}
-   \vspace{.05in}
+%   \vspace{.05in}
 \label{tab:results-linevio}
 \end{center}
 \end{table}
 
-Then, we investigate cases illustrating voltage variation of the electric grid, as shown in Table \ref{tab:results-volvio}. Here, the wind speed setting is MEDIUM (8-10m/s), which means the generated power of the wind turbine will be 33.3\%-78.7\% of its rated capacity. For Case 2 the datacenter is located at bus 38 (co-located with wind farm 5), and for Case 3 the datacenter is located at bus 25 (away from wind farms). The acceptable voltage range of a bus is set to [0.95p.u.,1.05p.u.]. It can be observed under this condition, there is already voltage deviation happening on one bus of the original New England system. When we choose a place for the datacenter co-locating with a wind farm as Case 2, the number of buses with voltage deviation will increase to four. If we don't restrict to co-located datacenter placement, we can find other possible choices (e.g. Case 3) to eliminate the unacceptable voltage deviation from nominal values. This result highlights that by carefully choosing the place for the datacenter might mitigate large voltage variations of the electric grid.
+Then, we investigate cases illustrating voltage variation of the electric grid, as shown in Table \ref{tab:results-volvio}. Here, the wind speed setting is MEDIUM (8-10m/s), which means the generated power of the wind turbine will be 33.3\%-78.7\% of its rated capacity. For Case 2 the datacenter is located at bus 38 (co-located with wind farm 5), and for Case 3 the datacenter is located at bus 25 (away from wind farms). The acceptable voltage range of a bus is set to [0.95p.u.,1.05p.u.]. It can be observed under this condition, there is already voltage deviation happening on one bus of the original New England system. When we choose a place for the datacenter co-locating with a wind farm as Case 2, the number of buses with voltage deviation will increase to four. If we don't restrict to co-located datacenter placement, we can find other possible choices (e.g. Case 3) to eliminate the unacceptable voltage deviation from nominal values. \red{By investigating detailed results, we found that connecting the datacenter to bus 38 increases the voltage on bus 29 since they are connected, and then the voltage variation cascades to bus 28, 26 and 25, making them rise over the upper limit. }This result highlights that by carefully choosing the place for the datacenter might mitigate large voltage variations of the electric grid.
 
 \begin{table}[ht]
 \begin{center}
@@ -187,19 +188,19 @@ Case No. & \# of buses with voltage deviation & List of buses with voltage devia
 \end{tabular}
 \label{tab:results-volvio}
 \end{center}
-\vspace{-0.25in}
+%\vspace{-0.25in}
 \end{table}
 
-At last, the total system losses are compared over the three cases under the condition of three wind speed settings, as shown in Figure~\ref{fig:loss-cases}. Here, the background load of the electric grid is set to normal (6254MW in total, summarized over all the buses). Three categories of wind speed settings are: LOW, MEDIUM, and HIGH. The setting HIGH means the wind speed is larger than 11m/s, and the output power of the wind turbine is nearly reaching its rated capacity. For example, a 100MW wind farm is generating at least 89.6MW power under this setting. The size of the additional datacenter in Case 2\&3 is set to 200MW. Specifically, for Case 2 the datacenter is located at bus 18 (co-located with wind farm 1) and for Case 3 the datacenter is located at bus 10 (away from all wind farms).
+At last, the total system losses are compared over the three cases under the condition of three wind speed settings, as shown in Figure~\ref{fig:loss-cases}.  Here, the background load of the electric grid is set to normal (6254MW in total, summarized over all the buses). Three categories of wind speed settings are: LOW, MEDIUM, and HIGH. The setting HIGH means the wind speed is larger than 11m/s, and the output power of the wind turbine is nearly reaching its rated capacity. For example, a 100MW wind farm is generating at least 89.6MW power under this setting. The size of the additional datacenter in Case 2\&3 is set to 200MW. Specifically, for Case 2 the datacenter is located at bus 18 (co-located with wind farm 1) and for Case 3 the datacenter is located at bus 10 (away from all wind farms). \red{We conducted the experiments with different wind speed values and both the average losses and the 95\% confidence intervals are reported as shown in Figure~\ref{fig:loss-cases}.}
 
-\begin{figure}[ht]
+\begin{figure}[hb]
 \centering
-\includegraphics[width=1\columnwidth]{img/loss3cases.pdf}
-\caption{Results of system losses}
+\includegraphics[width=1\columnwidth]{img/loss3cases_w_CI.pdf}
+\caption{Results of system losses \red{with 95\% confidence intervals}}
 \label{fig:loss-cases}
 \end{figure}
 
-By comparing the values of system losses from Figure~\ref{fig:loss-cases}, it can be observed that the co-location case (Case 2) could lead to more losses than Case 1 and Case 3. Take MEDIUM setting for example, the system losses of Case 3 is about 6\% less than Case 2, which illustrates system loss can be reduced by placing the datacenter correctly and co-location is not necessarily the best choice.
+By comparing the values of system losses \red{together with the 95\% confidence intervals} from Figure~\ref{fig:loss-cases}, it can be observed that the co-location case (Case 2) could lead to more losses than Case 1 and Case 3. Take MEDIUM setting for example, the system losses of Case 3 is about 6\% less than Case 2, which illustrates system loss can be reduced by placing the datacenter correctly and co-location is not necessarily the best choice.
 
 
 Note that even though we have provided one set of results for a particular set of condition, we have simulated different wind speed and load conditions. We found that in general the system loss magnitude could change. However, in most cases we saw that co-location is not the optimal choice for minimum system loss. In Section \ref{sec:framework} we will describe a method for determining the datacenter location that will correspond to minimal system loss annually and will cover all the wind speed and system load conditions.

@@ -12,35 +12,35 @@ As shown in the last section, the placement of new datacenters and wind farms ca
 \hline
 \textbf{Symbol} & \textbf{Meaning} & \textbf{Unit}\\
 \hline
-$dcCapacity$ & desired power capacity for computing in DC & kW \\
-$wfCapacity$ & desired power production capacity of wind farm & kW \\
+$\textit{dcCapacity}$ & desired power capacity for computing in DC & kW \\
+$\textit{wfCapacity}$ & desired power production capacity of wind farm & kW \\
 \hline \hline
-$pLand(l)$ & land price at $l$ & \$/m$^2$ \\
+$\textit{pLand}(l)$ & land price at $l$ & \$/m$^2$ \\
 \hline \hline
-$PUE(l,t)$ & PUE at $l$ during $t$ & \\
-$maxPUE(l)$ & maximum PUE at $l$ & \\
-$dcArea$ & land needed per kW of DC compute capacity &  m$^2$/kW \\
-$cLinePow(l)$ & cost to layout power line from $l$ to the closest power plant & \$ \\
-$cLineNet(l)$ & cost to layout optical fiber from $l$ to closest network backbone & \$ \\
-$pBuildDC(c)$ & per kW price of building a datacenter with $c$ power capacity & \$/kW \\
-$serverPow$ & server peak power demand & kW/serv \\
-$switchPow$ & switch peak power demand & kW/switch \\
-$servsSwitch$ & number of servers per switch & servs/switch \\
-$pServer$ & price of a server &  \$/serv \\
-$pSwitch$ & price of a network switch & \$/switch \\
-$pNBWServ$ & cost of external network bandwidth per server & \$/serv-month\\
-$pEnergy(l)$ & grid electricity price at $l$ & \$/kWh \\
-$powNeed(t)$ & avg computing power demand of DC during $t$ &  kW \\
+$\textit{PUE}(l,t)$ & PUE at $l$ during $t$ & \\
+$\textit{maxPUE}(l)$ & maximum PUE at $l$ & \\
+$\textit{dcArea}$ & land needed per kW of DC compute capacity &  m$^2$/kW \\
+$\textit{cLinePow}(l)$ & cost to layout power line from $l$ to the closest power plant & \$ \\
+$\textit{cLineNet}(l)$ & cost to layout optical fiber from $l$ to closest network backbone & \$ \\
+$\textit{pBuildDC}(c)$ & per kW price of building a datacenter with $c$ power capacity & \$/kW \\
+$\textit{serverPow}$ & server peak power demand & kW/serv \\
+$\textit{switchPow}$ & switch peak power demand & kW/switch \\
+$\textit{servsSwitch}$ & number of servers per switch & servs/switch \\
+$\textit{pServer}$ & price of a server &  \$/serv \\
+$\textit{pSwitch}$ & price of a network switch & \$/switch \\
+$\textit{pNBWServ}$ & cost of external network bandwidth per server & \$/serv-month\\
+$\textit{pEnergy}(l)$ & grid electricity price at $l$ & \$/kWh \\
+$\textit{powNeed}(t)$ & avg computing power demand of DC during $t$ &  kW \\
 \hline \hline
 $\beta(l,t)$ & avg generation efficiency of wind energy at $l$ during $t$ &  \%  \\
-$wfArea$ & land needed per kW wind power & \$/m$^2$ \\
-$pBuildWF$ & per kW price of building a wind power plant & \$/kW \\
+$\textit{wfArea}$ & land needed per kW wind power & \$/m$^2$ \\
+$\textit{pBuildWF}$ & per kW price of building a wind power plant & \$/kW \\
 %$avgEff(l)$ & avg generation efficiency of wind energy at $l$ & \% \\
-$revEnergy(l)$ & revenue for selling wind energy to grid at $l$ & \$/kWh \\
+$\textit{revEnergy}(l)$ & revenue for selling wind energy to grid at $l$ & \$/kWh \\
 \hline \hline
-$transLoss(t)$  & avg system transmission loss in grid during $t$ & kW \\
+$\textit{transLoss}(t)$  & avg system transmission loss in grid during $t$ & kW \\
 %$disLoss(t)$ & the losses for distributing power to datacenter during time epoch $t$ & kW \\
-$pTransLoss$ & the price for system transmission losses per kWh & \$/kWh \\
+$\textit{pTransLoss}$ & the price for system transmission losses per kWh & \$/kWh \\
 %$numLineVio(t)$  & the number of line capacity violation during time epoch $t$   &  \#  \\
 %$numVolVio(t)$  & the number of voltage level violation during time epoch $t$  &  \#  \\
 % $V_i$ & the voltage level of the $i$th bus & p.u. \\
@@ -57,45 +57,48 @@ $pTransLoss$ & the price for system transmission losses per kWh & \$/kWh \\
 
 \subsection{Optimization Framework}
 
-Table \ref{tab:par_setting} lists the set of parameters in our framework.  Using these parameters, we define the optimization problem shown in Figure~\ref{fig:optimization}.  The objective of this optimization problem is to minimize the total cost ($totalCost$) of building and operating a datacenter of a given size ($dcCapacity$) and a wind farm of a given size ($wfCapacity$). %\xynote{In the program, wind farm size is not given but calculated based on the datacenter size and other location-dependent parameters.}
+Table \ref{tab:par_setting} lists the set of parameters in our framework.  Using these parameters, we define the optimization problem shown in Figure~\ref{fig:optimization}.  The objective of this optimization problem is to minimize the total cost ({\em totalCost}) of building and operating a datacenter of a given size ({\em dcCAPEX}) and a wind farm of a given size ({\em wfCapacity}). %\xynote{In the program, wind farm size is not given but calculated based on the datacenter size and other location-dependent parameters.}
 The datacenter and wind farm can each be placed at any location within a set of given locations.  The total cost has three components, the cost of the datacenter ($dcCost$), the cost of the wind farm ($wfCost$), and the cost of losses in the transmission system ($transCost$).
 
-\begin{figure*}
+\begin{figure}
 % Minimize $totalCost$ subject to
 % \begin{eqnarray}
 % V^{min}_i  \leq  V_i \leq V^{max}_i\\
 % P_k \leq P^{max}_k
 % \end{eqnarray}
 % where
-{\small
+\begin{scriptsize}
 \begin{eqnarray}
- 	totalCost & = & dcCost + wfCost + transCost \\
-	dcCost & = & dcCAPEX + dcOPEX \\
-        dcCAPEX & = & dcLandCost + dcBuildCost + dcITCost \\
-        dcOPEX & = & dcNetCost + dcEnergyCost \\
-        dcLandCost & = & pLand(d) \cdot dcArea \cdot dcCapacity \\
-        dcBuildCost & = & dcTotalPow \cdot pBuildDC(dcTotalPow) +
-            cLinePow(d) + cLineNet(d) \\
-        dcTotalPow & = & dcCapacity \cdot maxPUE(d) \\
-        dcITCost & = & nServers \cdot pServer + nSwitches \cdot
-            pSwitch \\
-        nServers & = & dcCapacity / (serverPow + switchPow / servsSwitch)\\
-        nSwitches & = & nServers / servsSwitch\\
-        dcNetCost & = & nServers \cdot pNBWServ \\
-        dcEnergyCost & = & \sum_{t \in T} {|t| \cdot powNeed(t) \cdot PUE(d,t) \cdot pEnergy(d) } \\
- 	wfCost & = & wfCAPEX - wfRev  \\
-        wfCAPEX & = & wfLandCost + wfBuildCost \\
-        wfLandCost & = & pLand(w) \cdot wfArea \cdot wfCapacity \\
-        wfBuildCost & = & pBuildWF \cdot wfCapicity + cLinePow(w) \\
-        wfRev & = & revEnergy(w) \cdot  \sum_{t \in T}{ |t| \cdot
-            \beta(w,t) \cdot wfCapicity } \\
-        transCost & = & pTransLoss \cdot \sum_{t \in T}{ |t| \cdot transLoss(t)} % + disLoss(t))}\\
+ 	\textbf{\red{minimize}   }   \textit{totalCost}&=&\textit{dcCost + wfCost + transCost} \\
+	  \textit{dcCost}&=& \textit{dcCAPEX + dcOPEX} \\
+         \textit{dcCAPEX}&=& \textit{dcLandCost + dcBuildCost + dcITCost} \\
+        \textit{dcOPEX}&=& \textit{dcNetCost + dcEnergyCost} \\
+         \textit{dcLandCost}&=& \textit{pLand}(d) \cdot  \textit{dcArea} \cdot  \textit{dcCapacity} \\
+        \textit{dcBuildCost}&=& \textit{dcTotalPow} \cdot  \textit{pBuildDC(dcTotalPow)} + \nonumber\\
+         &  & \textit{cLinePow}(d) +  \textit{cLineNet}(d) \\
+         \textit{dcTotalPow} &=&  \textit{dcCapacity} \cdot  \textit{maxPUE}(d) \\
+         \textit{dcITCost}&=& \textit{nServers} \cdot  \textit{pServer} +  \textit{nSwitches} \cdot
+             \textit{pSwitch} \\
+         \textit{nServers}&=& \textit{dcCapacity} / ( \textit{serverPow} % \nonumber\\
+          +  \textit{switchPow} /  \textit{servsSwitch})\\
+         \textit{nSwitches}&=& \textit{nServers / servsSwitch}\\
+         \textit{dcNetCost}&=& \textit{nServers} \cdot  \textit{pNBWServ} \\
+         \textit{dcEnergyCost}&=&\sum_{t \in T} {|t| \cdot  \textit{powNeed}(t) \cdot  \textit{PUE}(d,t) \cdot  \textit{pEnergy}(d) } \\
+ 	 \textit{wfCost}&=& \textit{wfCAPEX - wfRev}  \\
+         \textit{wfCAPEX}&=& \textit{wfLandCost + wfBuildCost} \\
+         \textit{wfLandCost}&=& \textit{pLand}(w) \cdot  \textit{wfArea} \cdot  \textit{wfCapacity} \\
+         \textit{wfBuildCost}&=& \textit{pBuildWF} \cdot \textit{ wfCapicity + cLinePow(w)} \\
+         \textit{wfRev}&=& \textit{revEnergy}(w) \cdot  \sum_{t \in T}{ |t| \cdot
+            \beta(w,t) \cdot  \textit{wfCapicity} } \\
+         \textit{transCost}&=& \textit{pTransLoss} \cdot \sum_{t \in T}{ |t| \cdot  \textit{transLoss}(t)} % + disLoss(t))}\\
 \end{eqnarray}
-}
+\end{scriptsize}
 \caption{Optimization framework with objective of minimizing $totalCost$.  The datacenter is placed at location $d$ and the windfarm is placed at location $w$.  The objective is to minimize $totalCost$ for a given time period $T$ (divided into epochs denoted by $t$) and a set of possible locations for $d$ and $w$.  $|t|$ denotes the length of epoch $t$.}
 \label{fig:optimization}
 \vspace{-0.2in}
-\end{figure*}
+\end{figure}
+
+
 
 
 \subsubsection{Datacenter} The cost of the datacenter can be broken down into capital ($dcCAPEX$) and operational ($dcOPEX$) components.  The capital costs are those investments made upfront and depreciated over the lifetime of the datacenter.  These costs include the cost for buying land ($dcLandCost$), building the datacenter ($dcBuildCost$), and buying IT equipment ($dcITCost$).  The cost of building the datacenter include datacenter construction cost as well as the costs of laying power and network lines to the datacenter.  IT equipment includes servers and switches.  Land price varies according to location ($pLand(d)$ for location $d$), whereas the other prices do not to a first approximation.  Of course, the total cost of laying the power ($cLinePow(d)$) and network ($cLineNet(d)$) lines depends on location, as the distances to the closest power plant and network backbone are location-dependent.  The datacenter construction cost is typically estimated as a function of the maximum power to be consumed by the datacenter.  This maximum power is that required by the maximum number of servers and network switches when running at 100\% utilization times the maximum expected PUE of the datacenter.  The PUE is computed by dividing the overall power consumption by the power consumption of the computational equipment.  The PUE is higher when temperature and/or humidity are high, since cooling consumes more energy under those conditions.
@@ -116,11 +119,29 @@ The revenue earned by the wind farm is computed over the time period $T$, where 
 
 
 \subsubsection{Constraints}
+The major constraints that must be observed when optimizing is that there must not be any voltage and transmission line capacity violations\red{, as shown in Figure~\ref{fig:constraints}}.
 
-The major constraints that must be observed when optimizing is that there must not be any voltage and transmission line capacity violations.
+
+\begin{figure}[ht]
+{\scriptsize
+\begin{eqnarray}
+&\forall t :  \textit{dcCapacity} \geq \textit{powNeed}(t)\\
+&\forall d, \forall t: \textit{maxPUE}(d) \geq \textit{PUE}(d,t)\\
+&\forall w, \forall t: 0 \leq \beta(w,t) < 1\\
+&\textit{cLinePow}(w)=0 \text{ if } w=d\\
+&V^{min}_i  \leq  V_i \leq V^{max}_i \text{ for each bus $i$ }\\
+&P_k \leq P^{max}_k \text{ for each branch $j$ }
+\end{eqnarray}
+}
+\caption{\red{Optimization constraints, which show the limit of the datacenter power demand, PUE and efficiency factor of the wind farm. Note that the cost for building power line will be saved for the wind farm if it's co-located with the datacenter. The last two constraints indicate that there should be no line overloading and the voltages should be maintained within a required range during the power flow process. }}
+\label{fig:constraints}
+\vspace{-0.2in}
+\end{figure}
 
 \subsection{Solving the Optimization Problem}
 
+\red{The problem formulated in Figure~\ref{fig:optimization} is non-linear, since the calculation of $transLoss(t)$ involves solving non-linear equations as stated in Section \ref{sec:casestudy}.
+}
 Currently, we perform a complete search over all possible placement of the datacenter and wind farm to find the best solution to the optimization problem.  This approach works well for the scale that we are studying (e.g., the New England system).  However, as the system scale to much larger sizes, a more scalable approach would eventually be needed.  We leave this for future work.  (Note that the New England system that we study already covers a large area -- most of the North Eastern region of the U.S. and some parts of Canada -- so that it may not be necessary to study much larger systems.)
 
 % datacenters and renewable power plant, as well as the capacity provisioned at each location for datacenters or green power plants (if any).
