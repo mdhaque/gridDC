@@ -191,16 +191,18 @@ Case No. & \# of buses with voltage deviation & List of buses with voltage devia
 %\vspace{-0.25in}
 \end{table}
 
-At last, the total system losses are compared over the three cases under the condition of three wind speed settings, as shown in Figure~\ref{fig:loss-cases}.  Here, the background load of the electric grid is set to normal (6254MW in total, summarized over all the buses). Three categories of wind speed settings are: LOW, MEDIUM, and HIGH. The setting HIGH means the wind speed is larger than 11m/s, and the output power of the wind turbine is nearly reaching its rated capacity. For example, a 100MW wind farm is generating at least 89.6MW power under this setting. The size of the additional datacenter in Case 2\&3 is set to 200MW. Specifically, for Case 2 the datacenter is located at bus 18 (co-located with wind farm 1) and for Case 3 the datacenter is located at bus 10 (away from all wind farms). \red{We conducted the experiments with different wind speed values and both the average losses and the 95\% confidence intervals are reported as shown in Figure~\ref{fig:loss-cases}.}
+At last, the total system losses are compared over the three cases under the condition of three wind speed settings, as shown in Figure~\ref{fig:loss-cases}.  Here, the background load of the electric grid is set to normal (6254MW in total, summarized over all the buses). Three categories of wind speed settings are: LOW, MEDIUM, and HIGH. The setting HIGH means the wind speed is larger than 11m/s, and the output power of the wind turbine is nearly reaching its rated capacity. For example, a 100MW wind farm is generating at least 89.6MW power under this setting. The size of the additional datacenter in Case 2\&3 is set to 200MW. Specifically, for Case 2 the datacenter is located at bus 18 (co-located with wind farm 1) and for Case 3 the datacenter is located at bus 10 (away from all wind farms). %\red{We conducted the experiments with different wind speed values and both the average losses and the 95\% confidence intervals are reported as shown in Figure~\ref{fig:loss-cases}.}
 
 \begin{figure}[hb]
 \centering
-\includegraphics[width=1\columnwidth]{img/loss3cases_w_CI.pdf}
-\caption{Results of system losses \red{with 95\% confidence intervals}}
+\includegraphics[width=1\columnwidth]{img/loss3cases.pdf}
+\caption{Results of system losses}% \red{with 95\% confidence intervals}}
 \label{fig:loss-cases}
 \end{figure}
 
-By comparing the values of system losses \red{together with the 95\% confidence intervals} from Figure~\ref{fig:loss-cases}, it can be observed that the co-location case (Case 2) could lead to more losses than Case 1 and Case 3. Take MEDIUM setting for example, the system losses of Case 3 is about 6\% less than Case 2, which illustrates system loss can be reduced by placing the datacenter correctly and co-location is not necessarily the best choice.
+By comparing the values of system losses
+%\red{together with the 95\% confidence intervals}
+from Figure~\ref{fig:loss-cases}, it can be observed that the co-location case (Case 2) could lead to more losses than Case 1 and Case 3. Take MEDIUM setting for example, the system losses of Case 3 is about 6\% less than Case 2, which illustrates system loss can be reduced by placing the datacenter correctly and co-location is not necessarily the best choice.
 
 
 Note that even though we have provided one set of results for a particular set of condition, we have simulated different wind speed and load conditions. We found that in general the system loss magnitude could change. However, in most cases we saw that co-location is not the optimal choice for minimum system loss. In Section \ref{sec:framework} we will describe a method for determining the datacenter location that will correspond to minimal system loss annually and will cover all the wind speed and system load conditions.
