@@ -122,22 +122,23 @@ WF5 & 38& Massachusetts & 90\\
 \subsection{Case study}
 \label{sec:casestudy}
 We have used the above described model and carried out the following case studies to assess the impact of datacenter location on the power grid.
-\begin{itemize}
-\item{Case 1: Existing New England system}
-\item{Case 2: New England system with one additional datacenter and a co-located wind farm}
-\item{Case 3: New England system with one additional datacenter and a wind farm placed at different locations}
-\end{itemize}
-\red{Specifically, the wind farm is assumed to have the same characteristics no matter it's co-located with or located away from the datacenter.} For assessing the impact, we use the three metrics described earlier (section \ref{sec:intro}) and calculate the system losses, power flows through the transmission lines and the bus voltages.
-The system losses, line flows and the bus voltages are calculated by solving the power flow or loadflow equations. The loadflow equations mathematically model the power balance (i.e., net load +losses = total generation in the electric grid). Within an electric grid the power can be easily measured at the loads and at generators. Also, some generators have the capability to regulate the voltage at a bus at a constant preset reference value. The power flow equations are used to calculate the bus voltages (magnitude and angle), for a given network and a set of load and generation powers. The loadflow equation for a generic $n$ bus network with $k$ branches is given below.
+
+1) The ``modified'' New England system, i.e., the New England system modified to include the datacenters and wind farms described above.
+
+2) The modified New England system with one additional 200MW datacenter placed connected to bus 18 so that it is co-located with wind farm WF1.
+
+3) The modified New England system with one additional 200MW datacenter placed connected to bus 10, away from all wind farms.
+
+For assessing the impact, we use the three metrics described earlier (section \ref{sec:intro}) and calculate the system losses, power flows through the transmission lines and the bus voltages.  The system losses, line flows and the bus voltages are calculated by solving the power flow or loadflow equations. The loadflow equations mathematically model the power balance (i.e., net load +losses = total generation in the electric grid). Within an electric grid the power can be easily measured at the loads and at generators. Also, some generators have the capability to regulate the voltage at a bus at a constant preset reference value. The power flow equations are used to calculate the bus voltages (magnitude and angle), for a given network and a set of load and generation powers. The loadflow equation for a generic $n$ bus network with $k$ branches is given below.
+
 \begin{equation}
 P_{i} = \Sigma_{j=1}^{n}(|Y_{ij}||V_{i}||V_{j}|cos(\theta_{ij}+\delta_{j}-\delta_{i})
 \end{equation}
 \begin{equation}
 Q_{i} = -\Sigma_{j=1}^{n}(|Y_{ij}||V_{i}||V_{j}|sin(\theta_{ij}+\delta_{j}-\delta_{i})
 \end{equation}
-where $P_{i}$ and $Q_{i}$ are real and reactive powers at the $i^{th}$ bus; $|V_{i}| \angle \delta_{i}$ is the voltage magnitude and angle at the the $i^{th}$ bus; $|Y_{ij}| \angle \theta_{ij}$ is the admittance of the branch between $i^{th}$ and $j^{th}$ bus.
-For a given power $P_{i}$ and $Q_{i}$ at the $i^{th}$ load bus, the above powerflow equations are used to solve for the voltage magnitude and angle at the $i^{th}$ bus. Since the above equations, i.e., real and reactive powers are non-linear function of voltage they are solved iteratively using Newton Raphson method. Once the bus voltages are calculated the line flows and system losses are computed.
-\subsection{Results and discussion}
+
+\noindent where $P_{i}$ and $Q_{i}$ are real and reactive powers at the $i^{th}$ bus; $|V_{i}| \angle \delta_{i}$ is the voltage magnitude and angle at the the $i^{th}$ bus; $|Y_{ij}| \angle \theta_{ij}$ is the admittance of the branch between $i^{th}$ and $j^{th}$ bus.  For a given power $P_{i}$ and $Q_{i}$ at the $i^{th}$ load bus, the above powerflow equations are used to solve for the voltage magnitude and angle at the $i^{th}$ bus. Since the above equations, i.e., real and reactive powers are non-linear function of voltage they are solved iteratively using Newton Raphson method. Once the bus voltages are calculated the line flows and system losses are computed.  \subsection{Results and discussion}
 %I need only the following results for each case (Case1, Case2 and Case 3):
 %1. a table containing system losses for each case (total loss its only one number for each case)
 %2. any line capacity violations (line number)
