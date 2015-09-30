@@ -24,14 +24,14 @@ A transmission line typically has two ratings: a short term and a long
 term capacity rating. During certain wind and system load (including
 datacenter load) conditions, some of the transmission lines could get
 overloaded. If this happens during the normal operation of the grid,
-then one of the following will be done: i) if an electronic power flow
-controller is available, then it is used to control the power flow
+one of the following will be done: i) if an electronic power flow
+controller is available, it is used to control the power flow
 through the overloaded line; or ii) in extreme situations, the
 overloaded line is disconnected which may result in power supply
 interruption to the loads.
 
-If major transmission lines are getting overloaded quite often
-annually then new lines are planned and built.  As already mentioned,
+If major transmission lines are getting overloaded often during the
+year, new lines are planned and built.  As already mentioned,
 this solution is very expensive and takes a long time. The need for
 such expensive grid retrofits may be minimized by planning the
 location of large new generators such as wind farms and large new
@@ -67,8 +67,12 @@ up to 12 Giga-Watts of wind power in this region.  This enormous
 potential for wind power makes the region an interesting destination
 for new datacenters with offsetting wind farms.
 
-{\em Transmission network upgrades:} A study carried out by the New England ISO shows that they could potentially integrate wind resources to meet up to 24\% of the region's total annual electric energy needs in 2020 if the system includes transmission
-upgrades. If these transmission upgrades can be limited then the development of new wind farms becomes more economical.
+{\em Transmission network upgrades:} A study carried out by the New
+England ISO shows that they could potentially integrate wind resources
+to meet up to 24\% of the region's total annual electric energy needs
+in 2020 if the system includes transmission upgrades.  The development
+of new wind farms is more economical if these transmission upgrades
+can be limited.
 
 {\em Positive impacts of wind power in New England:} Introducing
 large amounts of low-marginal-cost wind generation tends to depress
@@ -89,18 +93,20 @@ necessarily true since {\em the impact on the transmission grid
   transmission network}.  For example, strategically placing a new load
 can {\em reduce} system losses in a transmission network.
 
-Before we carry out the case studies, we will describe the approximations we made and the models we used for each sub-system we considered in our study.
+Before we carry out the case studies, we describe the approximations
+we make and the models we use for each sub-system to be considered in our
+study. 
 %\thunote{Divya, I think we need to explain why we are adding wind farms and datacenters to the model.  Also, we need to briefly say how we figured out the bus-to-physical-location mapping.  Finally, we also need to briefly talk about the assumed load on the grid.}
 
 {\em New England transmission system model:} Our study is based on a
 widely used model of the New England transmission network
-\cite{bills1970line}. A single line diagram of this test system is
+\cite{bills1970line}. A single-line diagram of this test system is
 shown in Figure~\ref{fig:newengland}. As shown in the figure, the
 model lumps all the generators, loads and transmission lines in the
 New England ISO region to 10 generators, 19 loads and 46 lines and
 transformers. The 10 generator buses are numbered from 30-39 in
 Figure~\ref{fig:newengland}. Specifically, bus 39 represents the
-aggregation of a large number of generators interconnected to rest of
+aggregation of a large number of generators interconnected to the rest of
 US/Canada.  This model includes load data for periods of normal
 (nominal) and high loads.
 
