@@ -97,7 +97,8 @@ Minimize {\em totalCost}, where
   \textit{transCost}&=& \textit{pTransLoss} \cdot \sum_{t \in T}{ |t| \cdot  \textit{transLoss}(t)} % + disLoss(t))}\\
 \end{eqnarray}
 \end{scriptsize}
-\caption{Optimization problem.  The datacenter is placed at location $d$ and the windfarm is placed at location $w$.  The objective is to minimize $totalCost$ for a given time period $T$ (divided into epochs denoted by $t$) and a set of possible locations for $d$ and $w$.  $|t|$ denotes the length of epoch $t$.}
+\caption{Optimization problem.  The datacenter is placed at location
+  $d$ and the wind farm is placed at location $w$.  The objective is to minimize $totalCost$ for a given time period $T$ (divided into epochs denoted by $t$) and a set of possible locations for $d$ and $w$.  $|t|$ denotes the length of epoch $t$.}
 \label{fig:optimization}
 \vspace{-0.2in}
 \end{figure}
@@ -118,13 +119,24 @@ The electricity cost is computed based on the IT equipment's power demand over t
 
 The revenue earned by the wind farm is computed over the time period $T$, where the energy generated within any time epoch $t$ in $T$ at location $w$ depends on the efficiency of the wind turbines and the wind speed.  The efficiency of today's wind turbine is close to 50\%.  We capture the efficiency and impact of wind speed in epoch $t$ using the parameter $\beta(w,t)$, which gives the fraction of the wind farm's maximum capacity actually produced during $t$.
 
-\subsubsection{Transmission system} As discussed above, adding a datacenter and wind farm to an existing transmission system will alter the power flow of the network, thus affecting system losses.  We model these losses across the entire time period $T$, and assume that each unit of loss has a corresponding cost.  For each potential placement of the datacenter and wind farm, we compute the system loss for each time epoch $t$ using the power flow and loadflow equations described in Section~\ref{sec:quantify}.
+\subsubsection{Transmission system}
+As discussed above, adding a datacenter and wind farm to an existing
+transmission system will alter the power flow of the network, thus
+affecting the loads on transmission lines, the voltage of buses, and
+system losses.  We model these losses across the entire time period
+$T$, and assume that each unit of loss has a corresponding cost.  For
+each potential placement of the datacenter and wind farm, we compute
+the loads on the transmission lines, the voltages of buses, and the
+system loss for each time epoch $t$ using the approach described in
+Section~\ref{sec:quantify}.
 
 % On the other hand, during the transmission process the line capacity might be violated if the power flow exceeds the limit. We use $numLineVio(t)$ and $numVolVio(t)$ to denote the number of line capacity violations and voltage violations during power transmission. The grid operator will try to avoid such violations when operating the power grid system.
 
 
 \subsubsection{Constraints}
-The major constraints that must be observed when optimizing is that there must not be any voltage and transmission line capacity violations.
+The major constraints that must be observed when optimizing is that
+there must not be any voltage and transmission line capacity
+violations.
 %\red{, as shown in Figure~\ref{fig:constraints}}.
 
 

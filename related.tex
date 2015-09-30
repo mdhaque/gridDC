@@ -1,11 +1,46 @@
 \section{Related Work}
 \label{sec:related}
 
-As already mentioned, a number of previous efforts have studied the placement of new datacenters.  Alger \cite{Dalger05} explained how to choose an optimal location for a datacenter by considering hazards, accessibility, and scalability factors.  Stansberr \cite{Stansberr06} ranked some cities by estimating the annual operation costs of a datacenter.  Oley \cite{Boley09} considered looking for a proper location for the datacenter establishment only by investigating the power rates of different states.  Goiri $\textit{et al.}$ \cite{Goiri11place} focused on intelligently finding the best places for building multiple datacenters to form a network for interactive Internet services.  Berral $\textit{et al.}$ \cite{berral2014building} considered to select sites for datacenters and on-site power plants aiming at follow-the renewable cloud services.  Gao $\textit{et al.}$ \cite{gao2013answer} studied how to site datacenters near existing wind farms, and distributing load using a greedy online algorithm.  None of these works have considered the impact of placing new datacenters on the transmission grid.
+As already mentioned, a number of previous efforts have studied the
+placement of new datacenters.  Alger \cite{Dalger05} explained how to
+choose an optimal location for a datacenter by considering hazards,
+accessibility, and scalability factors.  Stansberr \cite{Stansberr06}
+ranked some cities by estimating the annual operation costs of a
+datacenter.  Oley \cite{Boley09} considered looking for a proper
+location for a datacenter by investigating the
+power rates of different states.  Goiri $\textit{et al.}$
+\cite{Goiri11place} focused on intelligently finding the best places
+for building multiple datacenters to form a network for interactive
+Internet services.  Berral $\textit{et al.}$ \cite{berral2014building}
+considered selecting sites for datacenters and on-site power plants
+that support ``follow-the-renewables'' cloud services.  Gao $\textit{et al.}$
+\cite{gao2013answer} studied how to site datacenters near existing
+wind farms, and distributing load using a greedy online algorithm.
+None of these works have considered the impact of placing new
+datacenters on the transmission grid. 
 
-A previous work that has considered the interaction of datacenters and the grid is~\cite{liu2014pricing}.  In this work, Liu $\textit{et al.}$ show that adding renewable power plants (solar in their study) can lead to voltage violations within a grid distribution system.  Then, they showed that if datacenters help avoid such voltage violations by dynamically adjusting their power demand based on signals from the grid.  A number of research efforts have also studied how datacenters can participate in demand response programs and ancillary services to help ease the management of the grid~\cite{Aikema12,AdamWierman2014}.  A key difference between these works and ours is the assumption of datacenters being able to dynamically adjust their power demands in response to grid signals.  In addition, they did not actually consider the placement of datacenters, nor did they consider transmission loss.
+A previous work that has considered the interaction of datacenters and
+the grid is~\cite{liu2014pricing}.  In this work, Liu $\textit{et
+  al.}$ show that adding renewable power plants (solar in their study)
+can lead to voltage violations within a grid distribution system.
+They also show that datacenters can help avoid such voltage
+violations by dynamically adjusting their power demand based on
+signals from the grid.  A number of research efforts have also studied
+how datacenters can participate in demand response programs and
+ancillary services to help ease the management of the
+grid~\cite{Aikema12,AdamWierman2014}.  A key difference between these
+works and ours is the assumption of datacenters being able to
+dynamically adjust their power demands in response to grid signals.
+In addition, they did not actually consider the placement of
+datacenters, nor did they consider transmission system losses.
 
-Mohsenian $\textit{et al.}$ in \cite{Mohsenian-Rad10grid} proposed a request distribution policy among datacenters to ensure power load balancing. They tried to minimize the maximum power on any transmission line by distributing the computing requests to suitable datacenter. Their work assumes that a fairly large number of datacenters (e.g. 6) are connected to the same power distribution network.  Further, they did not consider the impact of transmission loss on the placement of datacenters.
+Mohsenian $\textit{et al.}$ in \cite{Mohsenian-Rad10grid} proposed a
+request distribution policy among datacenters to ensure power load
+balancing. They tried to minimize the maximum power on any
+transmission line by distributing the computing requests to suitable
+datacenters. Their work assumes that a fairly large number of
+datacenters (e.g., 6) are connected to the same power distribution
+network.  Further, they did not consider the impact of transmission system losses on the placement of datacenters.
 
 % Larumbe $\textit{et al.}$ \cite{larumbe2012optimal} presented a mathematical problem aiming at solving the location and routing of cloud service components.
 % Unlike our work, they didn't put insights the possible impact of datacenters and distributed energy generations on the utility grid system.

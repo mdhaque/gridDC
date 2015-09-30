@@ -7,9 +7,20 @@ the increasing penetration of such
 {\em renewable powered datacenters}\footnote{We are calling a datacenter together with an offsetting renewable power plant a ``renewable powered datacenter'' for brevity, even though the two may {\em not} be physically co-located.}
 on the transmission grid.
 
-Researchers have studied the placement of new datacenters since they are expensive to build and operate, and costs are partly location-dependent~\cite{Goiri11place,Dalger05,Boley09,larumbe2012optimal,berral2014building}.  However, these studies have not considered the impact of new datacenters on the grid.  Others have studied whether offsetting renewable power plants should be co-located with the datacenters\cite{Ren12MASCOTS}, and have considered transmission loss when the datacenter and the renewable power plant were physically distributed.  However, they assumed a fixed loss percentage.
+Researchers have studied the placement of new datacenters since they are expensive to build and operate, and costs are partly location-dependent~\cite{Goiri11place,Dalger05,Boley09,larumbe2012optimal,berral2014building}.  However, these studies have not considered the impact of new datacenters on the grid.  Others have studied whether offsetting renewable power plants should be co-located with the datacenters\cite{Ren12MASCOTS}, and have considered transmission loss when the datacenter and the renewable power plant are physically distributed.  However, they assumed a fixed loss percentage.
 
-In this paper, we first study (using simulation) the impact of placing a datacenter and an offsetting wind farm at different locations within the real world transmission system of the New England Independent System Operator (ISO).  This transmission system spans most of the North Eastern region of the United States and some parts of Canada.  Our results show that different placements can lead to significant differences in the overloading of transmission lines, the number of voltage variations outside the acceptable range, and transmission system losses.  Interestingly, co-locating the datacenter and wind farm does not always minimize the impact.
+In this paper, we first study (using simulation) the impact of placing
+a new datacenter at different locations within the real world
+transmission system of the New England Independent System Operator
+(ISO).  This transmission system spans most of the North Eastern
+region of the United States and some parts of Canada.  Our results
+show that different placements can lead to significant differences in
+the overloading of transmission lines, the number of voltage
+variations outside the acceptable range, and transmission system
+losses.  Interestingly, co-locating the datacenter with a wind farm
+(we extended the base model of the New England ISO transmission
+network to include wind farms that have been developed since the model
+was created) does not always minimize the impact.
 
 % located at strategic places in the grid could help minimize i) overloading of transmission lines, ii) voltage variations outside the acceptable range, and iii) system losses.
 
@@ -26,13 +37,37 @@ In this paper, we first study (using simulation) the impact of placing a datacen
 
 % In this case, companies who want to build datacenters with either on-site or off-site renewable energy plants have to get the permission from the grid operators first in order to reduce the unexpected influence to the grid operation. Since the grid losses will also finally turn into expenses for end-users, service providers may want to collaborate with grid operators to minimize the overall cost when planning locations and capacity for the datacenters. In the current literature, datacenter placement issues have been mentioned in some prior work\cite{Goiri11place,Dalger05,Boley09,larumbe2012optimal}, and there are also some research focused on the capacity planning of green datacenters \cite{Le10,berral2014building}. Nevertheless, these work hasn't considered the impact of datacenter placement on the grid itself, which might also lead to comparable costs as other costs for datacenters.
 
-Motivated by the results of the first study, we then develop an optimization framework for placing new renewable powered datacenters.\footnote{Note that we are not proposing a new method for the placement of renewable power plants, which has been studied extensively in the industry.  Rather, the point of our work is that costs for the placement/construction/operation of a new datacenter, renewable power plant, {\em and} their impact on the transmission grid should be studied together.}  Our framework is similar to previous work in that it considers various capital and operational costs, some of which are location-dependent, and is formulated to minimize overall cost.  Unique to this work, however, is the added consideration of the cost of system loss in the transmission grid, as well as constraints for avoiding transmission line overloading and unacceptable voltage variations.
+Motivated by the results of the above study, we then develop an
+optimization framework for placing a new datacenter and an offsetting
+wind farm.\footnote{Note that we are not proposing a new method for
+  the placement of renewable power plants, which has been studied
+  extensively in the industry.  Rather, the point of our work is that
+  costs for the placement/construction/operation of a new datacenter,
+  renewable power plant, {\em and} their impact on the transmission
+  grid should be studied together.}  Our framework is similar to
+previous work in that it considers various capital and operational
+costs, some of which are location-dependent, and is formulated to
+minimize overall cost.  Unique to this work, however, is the added
+consideration of the cost of system loss in the transmission grid, as
+well as constraints for avoiding transmission line overloading and
+unacceptable voltage variations.
 
-Finally, we use our optimization framework in a case study to demonstrate the potential benefits of our placement approach.  Specifically, we again study the placement of a new datacenter and an offsetting wind farm in the New England ISO system.  Our results show that the strategic placement of a new renewable datacenter can indeed help to avoid the occurrences of transmission line overloading and unacceptable voltage variations.  Further, strategic placement while considering transmission system losses can lead to 8\% cost savings compared to simply co-locating the datacenter and wind farm, and 3.4\% compared to placement while ignoring transmission system losses.  While these percentages are modest, they translate to savings of tens of million dollars per year.
+Finally, we use our optimization framework in a case study to
+demonstrate the potential benefits of our placement approach.
+Specifically, we study the placement of a new datacenter and an
+offsetting wind farm in the New England ISO system.  Our results show
+that the strategic placement of a new renewable datacenter can indeed
+help to avoid the occurrences of transmission line overloading and
+unacceptable voltage variations.  Further, strategic placement while
+considering transmission system losses can lead to 8\% cost savings
+compared to simply co-locating the datacenter and wind farm, and 3.4\%
+compared to placement while ignoring transmission system losses.
+While these percentages are modest, they translate to savings of tens
+of million dollars per year.
 
 % In this paper, we attempt to set up a different point of view, by combining the consideration for cloud service providers and energy companies together and aiming at the minimization of the overall cost for both. First, we investigate the impact of datacenter placement and its importance to the grid by studying a region of grid network. We pay special attention to the datacenter size, datacenter locations and the variation of renewable power generations. Second, we formulate the optimization framework, which incorporates the costs of datacenters, renewable power plants and power grid into one objective. We also try to solve it under necessary constraints by using several different approaches. Then we conduct a case study in the New England area of the United States, by sitting and provisioning datacenters and power plants at different locations, with the purpose of minimizing the overall cost. Results show that grid losses can have remarkable impact on the decision of selecting best locations for green datacenters. Furthermore, the co-location choices by sitting the datacenter and green plants together don't show advantages despite of the reduced line cost and distribution cost, which is not that intuitive as prior work thought.
 
-\myparagraph{Contributions.} Our main contributions include: (i) demonstrating the potential impact of renewable powered datacenter placement on a grid transmission system, (ii) proposing an optimization framework for intelligent placement of renewable powered datacenters that accounts for the impact on the grid transmission system, and (iii) exploring the potential benefit of the placement framework using a realistic case study.
+\myparagraph{Contributions.} Our main contributions include: (i) demonstrating the potential impact of renewable powered datacenter placement on a grid transmission system, (ii) proposing an optimization framework for intelligent placement of renewable powered datacenters that accounts for the impact on the grid transmission system, and (iii) exploring the potential benefits of the placement framework using a realistic case study.
 
 % To the extent of our knowledge, there is no previous work considering the jointly placement issues of datacenters and green power plants while caring about the grid operational costs together. The remainder of the paper is organized as follows. Section \ref{sec:quantify} first quantifies the potential of datacenters together with wind farms by placing them into different buses of the grid network system. In Section \ref{sec:framework}, we describe the optimization framework in detail, showing the integration of various parameters of the entire problem. Section \ref{sec:eval} evaluates the costs and illustrates breakdown of the total cost by different kinds of strategies. In Section \ref{sec:related}, we present some prior work related to this paper. Finally, the conclusion is given in Section \ref{sec:conclusion}.
 

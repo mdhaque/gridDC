@@ -54,9 +54,13 @@ years.  For financing, we use an annual interest rate of 3.25\%.
 \caption{Location-dependent parameter settings for five typical
   locations.  %\thunote{Xiaoying, the maxPUE cannot possibly be that low, can it?}
   }
-\begin{tabular}{|l|p{22pt}|p{28pt}|p{20pt}|p{27pt}|p{27pt}|}
+\begin{tabular}{|l|c|c|c|c|c|}
 \hline
-\textbf{Locations}& Burlinton, NH&Springfield Hartnes, VT&Nash Island, CT&Marthas Vineyard, RI & Mount Washington, NH
+& \multicolumn{1}{p{22pt}|}{Burlinton, NH} &
+\multicolumn{1}{p{28pt}|}{Springfield Hartnes, VT} &
+\multicolumn{1}{p{20pt}|}{Nash Island, CT} &
+\multicolumn{1}{p{27pt}|}{Marthas Vineyard, RI} &
+\multicolumn{1}{p{27pt}|}{Mount Washington, NH}
 \\
 \hline
 $pLand$ (\$/m$^2$)&946.9&946.9&946.9&680.21&946.9  \\
@@ -75,7 +79,7 @@ Average $\beta$ (\%) &11.7&2.7&	40&	15.9&56.8 \\
 \begin{table}[ht]
 \begin{center}
 \caption{Values of location-independent parameters.}
-\begin{tabular}{|l|c|r|}
+\begin{tabular}{|l|c|c|}
 \hline
 \textbf{Parameter}& \textbf{Value} &\textbf{Unit}\\
 \hline
@@ -178,13 +182,14 @@ as the individual placement of datacenter and wind farm (DC+G\_WF+G).
 \begin{figure}[ht]
 \centering
 \includegraphics[width=1\columnwidth]{img/cost-one-dc-one-wf}
-\caption{Costs of building one datacenter (100MW) with one wind farm}
+\caption{Cost of building/operating a 100MW datacenter and an offsetting wind farm}
 \label{fig:cost1dc1wf}
 \end{figure}
 
 \begin{table}[ht]
 \begin{center}
-\caption{Detailed results of cost savings by different strategies.}
+\caption{Locations of datacenter and wind farm, and the resulting
+  total costs.}
 \begin{tabular}{|l|p{50pt}|p{50pt}|p{30pt}|p{20pt}|}
 \hline
 \textbf{Strategy}& \textbf{Datacenter location} &\textbf{Wind farm location} &\textbf{Total cost (M\$/year)}% & \textbf{Cost saving (\%)}
